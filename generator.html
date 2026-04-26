@@ -38,6 +38,21 @@ body {
   overflow-y: auto;
 }
 
+#page1-preview-box {
+  margin-top: 20px;
+  padding: 10px;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  max-height: 300px;
+  overflow: auto;
+}
+
+#page1-preview .page {
+  transform: scale(0.8);
+  transform-origin: top left;
+}
+
 #preview-container {
   flex: 1;
 }
@@ -84,6 +99,32 @@ input, select, textarea {
   margin-top: 10px;
 }
 
+#gen-toast {
+  position: fixed;
+  bottom: 200px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  
+  background: #2ecc71;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  
+  font-weight: 600;
+  font-size: 14px;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s ease;
+
+  z-index: 2000;
+}
+
+#gen-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 .nav {
   background: #222;
   padding: 10px;
@@ -113,9 +154,9 @@ button {
 
 .switch {
   position: relative;
-  display: inline-block;
+  display: inline-block;   /* 🔥 important */
   width: 40px;
-  height: 22px;
+  height: 20px;
 }
 
 .switch input {
@@ -127,13 +168,12 @@ button {
 .slider {
   position: absolute;
   cursor: pointer;
-  background-color: #ccc;
-  border-radius: 22px;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  transition: 0.3s;
+  background-color: #ccc;
+  border-radius: 20px;
 }
 
 .slider:before {
@@ -141,11 +181,11 @@ button {
   content: "";
   height: 16px;
   width: 16px;
-  left: 3px;
-  bottom: 3px;
+  left: 2px;
+  bottom: 2px;
   background-color: white;
   border-radius: 50%;
-  transition: 0.3s;
+  transition: 0.2s;
 }
 
 input:checked + .slider {
@@ -153,7 +193,7 @@ input:checked + .slider {
 }
 
 input:checked + .slider:before {
-  transform: translateX(18px);
+  transform: translateX(20px);
 }
 
 .btn-generate { background: #3498db; color: black; }
@@ -256,38 +296,38 @@ button:hover { opacity: 0.9; }
   <h2>Application Data</h2>
   
   <label>Full Old Name (Legal)</label>
-  <input id="old_name" value="Dead Name">
-  <label>
+  <input id="old_name" placeholder="Dead name">
+
   
   <label>Full New Name</label>
-  <input id="new_name" value="New Name">
-  <label>
-  <label>
+  <input id="new_name" placeholder="New name">
+ 
+  <div class="checkbox-row">
   <label class="switch">
-  <input type="checkbox" id="use_alias" onchange="toggleAlias()">
-  <span class="slider"></span>
-</label>
-<span style="margin-left:10px;">Add Alias Names</span>
-
+    <input type="checkbox" id="use_alias" onchange="toggleAlias()">
+    <span class="slider"></span>
+  </label>
+  <span>Use Alias</span>
+</div>
 
   <div id="alias_section" style="display:none;">
 
   <label>Old Name Alias 1</label>
-  <input id="old_alias1">
+  <input id="old_alias1" placeholder="Old name alias">
 
   <label>Old Name Alias 2</label>
-  <input id="old_alias2">
+  <input id="old_alias2" placeholder="Old name alias">
 
   <label>New Name Alias 1</label>
-  <input id="new_alias1">
+  <input id="new_alias1" placeholder="New name alias">
 
   <label>New Name Alias 2</label>
-  <input id="new_alias2">
+  <input id="new_alias2" placeholder="New name alias">
 
 </div>
 
   <label>Father's Name</label>
-  <input id="guardian" value="">
+  <input id="guardian" placeholder="Father name">
 
   <label>Date of birth</label>
   <input id="dob" type="date">
@@ -298,13 +338,15 @@ button:hover { opacity: 0.9; }
     <option value="FTM">Female to Male</option>
     <option value="MTT">Male to Transgender</option>
     <option value="FTT">Female to Transgender</option>
+	<option value="TTM">Transgender to Male</option>
+    <option value="TTF">Transgender to Female</option>
   </select>
   
-  <label>GID Letter Place</label>
-  <input id="med_place" value="CITY NAME">
+  <label>Place of Obtained GID letter</label>
+  <input id="med_place" placeholder="City">
 
   <label>Full Residential Address</label>
-  <textarea id="address" rows="4"></textarea>
+  <textarea id="address" placeholder="Address" rows="3"></textarea>
 
   <label>Phone Number</label>
   <input id="phone" value="+91 " oninput="handlePhoneInput(this)" onkeydown="protectPrefix(event, this)">
@@ -312,8 +354,12 @@ button:hover { opacity: 0.9; }
   <label>Email Address</label>
   <input id="email" type="email" placeholder="example@email.com" oninput="handleEmailInput(this)">
 
-  <button class="btn-generate" onclick="generate()">Update All Pages</button>
-  
+  <button class="btn-generate" onclick="generate()">Generate</button>
+  <div id="gen-toast">✔ Documents Generated</div>
+  <h3>Newspaper Advert Preview</h3>
+<div id="page1-preview-box">
+  <div id="page1-preview"></div>
+</div>
   <h4>Export Options</h4>
   <button class="btn-docx" onclick="downloadAffidavitDOCX()">Download Affidavit (DOCX)</button>
   <button class="btn-cddocx" onclick="downloadCDDOCX()">Download CD Matter (DOCX)</button>
@@ -323,38 +369,25 @@ button:hover { opacity: 0.9; }
 </div>
 </div>
 
-<div id="preview-wrapper">
 
-  <div id="preview-container">
-    <div id="printArea">
-      <div id="page1"></div>
-    </div>
-  </div>
-
-  <div id="preview-container1">
-    <div id="printArea1">
+<div style="display:none;">
+ <div id="printArea1">
+  <div id="page1"></div>
       <div id="page2"></div>
       <div id="page3"></div>
     </div>
-  </div>
-
-  <div id="preview-container2">
-    <div id="printArea2">
+  <div id="printArea2">
       <div id="page4"></div>
       <div id="page5"></div>
       <div id="page6"></div>
       <div id="page7"></div>
       <div id="page8"></div>
     </div>
-  </div>
-
-  <div id="preview-container3">
-    <div id="printArea3">
+   <div id="printArea3">
       <div id="page9"></div>
     </div>
-  </div>
-
 </div>
+
 <div id="visitor-counter">
   <span>👀</span>
   <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fmensisnem.github.io%2FGazette%2F&label=&countColor=%233498db" />
@@ -440,7 +473,17 @@ function getWitnessSection() {
 function getRelation(gender) {
   if (gender === "Male") return "S/o";
   if (gender === "Female") return "D/o";
-  return "C/o"; // your transgender case
+  return "Transgender of"; // your transgender case
+}
+
+function showGeneratedToast() {
+  const toast = document.getElementById("gen-toast");
+
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 3000); // disappears after 2s
 }
 
 function calculateAge(dob) {
@@ -588,6 +631,14 @@ function generate() {
        FTT: {
        oldGen: "Female",
        newGen: "Transgender"
+      },
+	  TTM: {
+       oldGen: "Transgender",
+       newGen: "Male"
+      },
+       TTF: {
+       oldGen: "Transgender",
+       newGen: "Female"
       }
     };
 
@@ -599,7 +650,16 @@ function generate() {
     const oldRel = getRelation(oldGen);
     const newRel = getRelation(newGen);
   
+const birthGenderMap = {
+  MTF: "Male",
+  FTM: "Female",
+  MTT: "Male",
+  FTT: "Female",
+  TTM: "Female",   // 🔥 assumption (AFAB → Male)
+  TTF: "Male"      // 🔥 assumption (AMAB → Female)
+};
 
+const birthGender = birthGenderMap[transition];
 
   // PAGE 1: PUBLIC NOTICE
   document.getElementById("page1").innerHTML = `
@@ -620,6 +680,9 @@ function generate() {
     </div>
 
   </div>`;
+
+document.getElementById("page1-preview").innerHTML =
+  document.getElementById("page1").innerHTML;
 
   document.getElementById("page2").innerHTML = `
 <div class="page">
@@ -720,7 +783,7 @@ document.getElementById("page3").innerHTML = `
       <div class="title">UNDERTAKING</div>
       <div class="point">
         <div class="point-num">1.</div>
-        <div>I, <b>${oldNameFull}</b>, ${oldRel} ${data.father}, assigned as <b>${oldGen}</b> at the time of birth, residing at ${data.addr}, Hereby undertake that I <b>${oldNameFull}</b> want to change my gender as <b>${newGen}</b> and name as <b>${newNameFull}</b>.</div>
+        <div>I, <b>${oldNameFull}</b>, ${oldRel} ${data.father}, assigned as <b>${birthGender}</b> at the time of birth, residing at ${data.addr}, Hereby undertake that I <b>${oldNameFull}</b> want to change my gender as <b>${newGen}</b> and name as <b>${newNameFull}</b>.</div>
       </div>
       <div class="point">
         <div class="point-num">2.</div>
@@ -894,6 +957,9 @@ document.getElementById("page3").innerHTML = `
         <b></b> ${oldNameFull}
       </div>
     </div>`;
+	
+showGeneratedToast();
+	
    return {
     newNameFull,
     oldNameFull,
@@ -922,18 +988,22 @@ function downloadCDDOCX() {
   downloadDOCX("printArea3", "CD");
 }
 
-function downloadPDF(areaId, filename) {
-  const element = document.getElementById(areaId);
+<!-- function downloadPDF(areaId, filename) { -->
+<!--  const element = document.getElementById(areaId);-->
 
-  html2pdf().set({
-    margin: 0,
-    filename: filename + ".pdf",
-    html2canvas: { scale: 2 },
-    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-    pagebreak: { mode: ['css', 'legacy'] }
-  }).from(element).save();
+ <!-- html2pdf().set({-->
+ <!--   margin: 0,-->
+  <!--  filename: filename + ".pdf",-->
+  <!--  html2canvas: { scale: 2 },-->
+ <!--   jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },-->
+ <!--   pagebreak: { mode: ['css', 'legacy'] }-->
+ <!-- }).from(element).save();-->
+<!--}
+function downloadPDF() {
+  const element = document.getElementById("printArea2");
+  const opt = { margin: 0, filename: 'Gazette_Application_Set.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } };
+  html2pdf().set(opt).from(element).save();
 }
-
 
 id="finaldocx"
 function downloadAffidavitDOCX() {
@@ -1184,7 +1254,7 @@ new Paragraph({
 }
 
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://unpkg.com/docx@9.6.1/dist/index.umd.cjs"></script>
 </body>
 </html>
