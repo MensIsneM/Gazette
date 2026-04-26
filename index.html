@@ -45,6 +45,25 @@ input, select, textarea {
   font-size: 0.9rem;
 }
 
+#visitor-counter {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  background: white;
+  padding: 8px 12px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+#visitor-counter img {
+  height: 20px;
+}
+
 
 button {
   width: 100%;
@@ -156,6 +175,8 @@ button:hover { opacity: 0.9; }
 .aff-text {
   flex: 1;
 }
+
+
 
 .title { text-align: center; font-weight: bold; font-size: 14pt; margin-bottom: 35px; text-transform: uppercase; }
 .para { line-height: 1.1; text-align: justify; margin-bottom: 20px; font-size: 12pt; }
@@ -282,6 +303,11 @@ button:hover { opacity: 0.9; }
   </div>
 
 </div>
+<div id="visitor-counter">
+  <span>👀</span>
+  <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fmensisnem.github.io%2FGazette%2F&label=&countColor=%233498db" />
+</div>
+
 
 <script>
 
