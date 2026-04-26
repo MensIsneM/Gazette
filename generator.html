@@ -1010,6 +1010,7 @@ function downloadAffidavitDOCX() {
   const result = generate();
   if (!result) return;
 
+
   const {
     newNameFull,
     oldNameFull,
@@ -1250,6 +1251,103 @@ new Paragraph({
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
     link.download = "Affidavit.docx";
+    link.click();
+  });
+}
+
+function downloadCDDOCX() {
+  const result = generate();
+  if (!result) return;
+
+  const {
+    newNameFull,
+    oldNameFull,
+    newGen,
+    newRel,
+    oldRel,
+    data
+  } = result;
+
+  const {
+    Document,
+    Packer,
+    Paragraph,
+    TextRun,
+    AlignmentType
+  } = docx;
+
+  const doc = new Document({
+    sections: [
+      {
+        properties: {
+          page: {
+            margin: {
+              top: 1200,
+              bottom: 1200,
+              left: 1200,
+              right: 1200
+            }
+          }
+        },
+
+        children: [
+
+          // POINT 1
+          new Paragraph({
+            alignment: AlignmentType.JUSTIFIED,
+            children: [
+              new TextRun({
+                text: `1. I ${oldNameFull}, ${oldRel} ${data.father}, residing at ${data.addr}, do hereby undertake that I ${oldNameFull} want to change my name to ${newNameFull} and gender ${newGen}.`,
+                size: 24
+              })
+            ],
+            spacing: { after: 200 }
+          }),
+
+          // POINT 2
+          new Paragraph({
+            alignment: AlignmentType.JUSTIFIED,
+            children: [
+              new TextRun({
+                text: `2. I ${oldNameFull} henceforth be known as ${newNameFull}, ${newRel} ${data.father}.`,
+                size: 24
+              })
+            ],
+            spacing: { after: 200 }
+          }),
+
+          // POINT 3
+          new Paragraph({
+            alignment: AlignmentType.JUSTIFIED,
+            children: [
+              new TextRun({
+                text: `3. The above statement made by me is true and correct to the best of my knowledge and belief. If any legal issues arise in this regard at any stage, I will be personally responsible for the same and Department of Publication will not be liable for any consequences arising therefrom.`,
+                size: 24
+              })
+            ],
+            spacing: { after: 400 }
+          }),
+
+          // SIGNATURE
+          new Paragraph({
+            alignment: AlignmentType.RIGHT,
+            children: [
+              new TextRun({
+                text: oldNameFull,
+                size: 24
+              })
+            ]
+          })
+
+        ]
+      }
+    ]
+  });
+
+  Packer.toBlob(doc).then(blob => {
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "CD.docx";
     link.click();
   });
 }
