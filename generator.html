@@ -49,8 +49,8 @@ body {
 }
 
 #page1-preview .page {
-  transform: scale(0.8);
-  transform-origin: top left;
+  transform: scale(0.1);
+  transform-origin: top center;
 }
 
 #preview-container {
@@ -356,7 +356,7 @@ button:hover { opacity: 0.9; }
 
   <button class="btn-generate" onclick="generate()">Generate</button>
   <div id="gen-toast">✔ Documents Generated</div>
-  <h3>Newspaper Advert Preview</h3>
+  <h3>Newspaper Advert Text</h3>
 <div id="page1-preview-box">
   <div id="page1-preview"></div>
 </div>
@@ -691,7 +691,7 @@ document.getElementById("page1-preview").innerHTML =
 
   <div class="para">
     I, <b>${newNameFull}</b>, formerly known as <b>${oldNameFull}</b>, 
-    ${newRel} <b>${data.father}</b>, aged about <b>${age || '___'}</b> years, 
+    ${newRel} <b>${data.father}</b>, aged about <b>${age}</b> years, 
     residing at ${data.addr}, do hereby solemnly affirm 
     and state on oath as under:
   </div>
@@ -1017,6 +1017,7 @@ function downloadAffidavitDOCX() {
     oldGen,
     newGen,
     newRel,
+	oldRel,
     data
   } = result;
 
@@ -1087,7 +1088,7 @@ new Paragraph({
     }),
 
     new TextRun({
-      text: `, ${newRel} ${data.father}, aged about ${age || "___"} years, residing at ${data.addr}, do hereby solemnly affirm and state on oath as under:`,
+      text: `, ${oldRel} ${data.father}, aged about ${age} years, residing at ${data.addr}, do hereby solemnly affirm and state on oath as under:`,
       size: 24
     })
   ],
