@@ -52,6 +52,24 @@ img.placeholder {
   text-decoration: none;
 }
 
+.nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav-flag {
+  width: 40px;          /* adjust 30–50px */
+  height: auto;
+
+  margin-left: auto;    /* pushes it to right */
+
+  image-rendering: pixelated; /* keeps crisp if pixel style */
+
+  opacity: 0.9;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+
 .btn {
   display: inline-block;
   margin-top: 15px;
@@ -70,6 +88,8 @@ img.placeholder {
   <a href="index.html">Guide</a>
   <a href="generator.html">Generator</a>
   <a href="ysupport.html" style="font-weight:bold;">Support</a>
+  
+   <img src="assets/trans.gif" class="nav-flag" alt="Trans Flag">
 </div>
 
 <div class="container">
