@@ -256,7 +256,7 @@ button:hover { opacity: 0.9; }
 transform-origin: top left;
   background: white;
   width: 210mm;
-  min-height: mm;
+  min-height: 297mm;
   padding: 0 20mm 20mm 20mm;
   box-shadow: 0 0 15px rgba(0,0,0,0.1);
   box-sizing: border-box;
@@ -1122,9 +1122,10 @@ function downloadPDF() {
   filename: "Gazette.pdf",
   image: { type: "jpeg", quality: 0.98 },
   html2canvas: {
-      scale: 2,
-      windowWidth: 794   // 🔥 key fix
-    },
+  scale: 2,
+  windowWidth: 794,
+  scrollY: 0
+}
   jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
   pagebreak: { mode: ['css'] }
 };
