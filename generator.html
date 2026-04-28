@@ -1121,7 +1121,10 @@ function downloadPDF() {
   margin: 0,
   filename: "Gazette.pdf",
   image: { type: "jpeg", quality: 0.98 },
-  html2canvas: { scale: 2 },
+  html2canvas: {
+      scale: 2,
+      windowWidth: 794   // 🔥 key fix
+    },
   jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
   pagebreak: { mode: ['css'] }
 };
