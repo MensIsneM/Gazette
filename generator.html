@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gazette Doc Maker</title>
 
 <style>
@@ -11,6 +12,7 @@ body {
   margin: 0;
   background: #DAB1DA;
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 #printArea2 {
@@ -31,7 +33,10 @@ body {
 #editor {
   flex: 200 200 200px;
   background: white;
+  display: flex;
   padding: 25px;
+  flex-direction: column;
+  gap: 10px;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.08);
   height: fit-content;
@@ -128,6 +133,14 @@ input, select, textarea {
   transform: translateX(-50%) translateY(0);
 }
 
+.container {
+  max-width: 480px;   /* 🔥 phone width */
+  margin: auto;
+  padding: 10px;
+}
+
+
+
 .nav {
   background: #222;
   padding: 10px;
@@ -142,6 +155,26 @@ input, select, textarea {
   margin-right: 15px;
   text-decoration: none;
 }
+
+.nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.nav-flag {
+  width: 40px;          /* adjust 30–50px */
+  height: auto;
+
+  margin-center: auto;    /* pushes it to right */
+
+  image-rendering: pixelated; /* keeps crisp if pixel style */
+
+  opacity: 0.9;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
 
 button {
   width: 100%;
@@ -195,6 +228,18 @@ input:checked + .slider {
   background-color: #3498db;
 }
 
+input, textarea, select {
+  width: 100%;
+  font-size: 14px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+button {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+}
+
 input:checked + .slider:before {
   transform: translateX(20px);
 }
@@ -208,6 +253,8 @@ button:hover { opacity: 0.9; }
 
 /* PRINT/DOC STYLE - MIMICKING PDF SPACING */
 .page {
+transform: scale(0.5);
+transform-origin: top left;
   background: white;
   width: 210mm;
   min-height: mm;
@@ -264,6 +311,19 @@ button:hover { opacity: 0.9; }
 }
 
 
+.nav-flag {
+  width: 40px;          /* adjust 30–50px */
+  height: auto;
+
+  margin-center: auto;    /* pushes it to right */
+
+  image-rendering: pixelated; /* keeps crisp if pixel style */
+
+  opacity: 0.9;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+
 .title { text-align: center; font-weight: bold; font-size: 14pt; margin-bottom: 35px; text-transform: uppercase; }
 .para { line-height: 1.1; text-align: justify; margin-bottom: 20px; font-size: 12pt; }
 .point { margin-left: 0; margin-bottom: 15px; line-height: 1.1; font-size: 12pt; display: flex; }
@@ -276,6 +336,23 @@ button:hover { opacity: 0.9; }
   #app {
     flex-direction: column;   /* 🔥 stack vertically */
   }
+
+@media (max-width: 768px) {
+  #previewArea {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  body::before {
+    content: "This tool is optimized for mobile 📱";
+    display: block;
+    text-align: center;
+    padding: 20px;
+    background: #111;
+    color: white;
+  }
+}
 
   #editor, 
   #preview-container {
@@ -302,6 +379,7 @@ button:hover { opacity: 0.9; }
   <a href="index.html">Guide</a>
   <a href="generator.html">Generator</a>
   <a href="ysupport.html" style="font-weight:bold;">Support</a>
+  <img src="assets/trans.gif" class="nav-flag" alt="Trans Flag">
 </div>
 <div id="main-content">
   <!-- your existing generator UI -->
