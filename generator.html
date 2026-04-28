@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gazette Doc Maker</title>
 
 <style>
@@ -78,6 +78,10 @@ input, select, textarea {
   border-radius: 6px;
   box-sizing: border-box;
   font-size: 0.9rem;
+}
+
+#ad-output {
+  min-height: 120px;   /* 🔥 force visible height */
 }
 
 #visitor-counter {
@@ -364,7 +368,12 @@ transform-origin: top left;
     flex-direction: column;
   }
 
-  #editor,
+  #editor {
+    position: relative;   /* 🔥 kill sticky */
+    max-height: none;
+    overflow: visible;
+  }
+ 
   #preview-container {
     width: 100%;
   }
