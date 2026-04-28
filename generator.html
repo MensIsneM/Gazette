@@ -253,17 +253,17 @@ button:hover { opacity: 0.9; }
 
 /* PRINT/DOC STYLE - MIMICKING PDF SPACING */
 .page {
+transform: scale(0.5);
 transform-origin: top left;
   background: white;
-   padding-top: 25mm;
   width: 210mm;
-  min-height: 297mm;
+  min-height: mm;
   padding: 0 20mm 20mm 20mm;
   box-shadow: 0 0 15px rgba(0,0,0,0.1);
   box-sizing: border-box;
   font-family: "Times New Roman", Times, serif;
   color: black;
-  position: relative; 
+  position: relative;
 
   /* 🔥 ADD THESE ↓↓↓ */
   page-break-after: always;
@@ -1122,11 +1122,7 @@ function downloadPDF() {
   margin: 0,
   filename: "Gazette.pdf",
   image: { type: "jpeg", quality: 0.98 },
-  html2canvas: {
-  scale: 2,
-  windowWidth: 794,
-  scrollY: 0
-}
+  html2canvas: { scale: 2 },
   jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
   pagebreak: { mode: ['css'] }
 };
