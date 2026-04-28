@@ -52,13 +52,15 @@ body {
   background: #f9f9f9;
   border: 1px solid #ccc;
   border-radius: 6px;
-  max-height: 300px;
+  height: 300px;
   overflow: auto;
 }
 
-#page1-preview .page {
-  transform: scale(0.1);
-  transform-origin: top center;
+#page1-preview-wrapper {
+  transform: scale(0.4);
+  transform-origin: top left;
+  
+  height: 250%;  /* compensates shrink */
 }
 
 #preview-container {
@@ -134,12 +136,24 @@ input, select, textarea {
 }
 
 .container {
-  max-width: 480px;   /* 🔥 phone width */
+  max-width: 400px;   /* 🔥 phone width */
   margin: auto;
   padding: 10px;
 }
 
+#ad-output {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  resize: none;
+  background: #fafafa;
+}
 
+button {
+  margin-top: 8px;
+}
 
 .nav {
   background: #222;
@@ -256,7 +270,7 @@ button:hover { opacity: 0.9; }
 transform-origin: top left;
   background: white;
   width: 210mm;
-  min-height: mm;
+ 
   padding: 0 20mm 20mm 20mm;
   box-shadow: 0 0 15px rgba(0,0,0,0.1);
   box-sizing: border-box;
@@ -314,7 +328,7 @@ transform-origin: top left;
   width: 40px;          /* adjust 30–50px */
   height: auto;
 
-  margin-center: auto;    /* pushes it to right */
+  margin-left: auto;    /* pushes it to right */
 
   image-rendering: pixelated; /* keeps crisp if pixel style */
 
@@ -331,20 +345,12 @@ transform-origin: top left;
 .address-block { margin-bottom: 30px; line-height: 1.4; }
 .para1 { line-height: 1.0; text-align: justify; margin-bottom: 0px; font-size: 10pt; }
 
-@media (max-width: 768px) {
-  #app {
-    flex-direction: column;   /* 🔥 stack vertically */
-  }
 
-@media (max-width: 768px) {
-  #previewArea {
-    display: none;
-  }
-}
+
+
 
 @media (min-width: 768px) {
   body::before {
-    content: "This tool is optimized for mobile 📱";
     display: block;
     text-align: center;
     padding: 20px;
@@ -353,9 +359,18 @@ transform-origin: top left;
   }
 }
 
-  #editor, 
+@media (max-width: 768px) {
+  #app {
+    flex-direction: column;
+  }
+
+  #editor,
   #preview-container {
     width: 100%;
+  }
+
+  #page1-preview-box {
+    max-height: 300px;
   }
 }
 
@@ -449,9 +464,9 @@ transform-origin: top left;
   <button class="btn-generate" onclick="generate()">Generate</button>
   <div id="gen-toast">✔ Documents Generated</div>
   <h3>Newspaper Advert Text</h3>
-<div id="page1-preview-box">
-  <div id="page1-preview"></div>
-</div>
+<textarea id="ad-output" rows="6" readonly placeholder="Click Generate to see text..."></textarea>
+
+<button onclick="copyAdText()">Copy Advert Text</button>
   <h4>Export Options</h4>
   <button class="btn-docx" onclick="downloadAffidavitDOCX()">Download Affidavit (DOCX)</button>
   <button class="btn-cddocx" onclick="downloadCDDOCX()">Download CD Matter (DOCX)</button>
@@ -686,6 +701,17 @@ function protectPrefix(e, el) {
   }
 }
 
+function copyAdText() {
+  const textarea = document.getElementById("ad-output");
+
+  textarea.select();
+  textarea.setSelectionRange(0, 99999); // mobile support
+
+  navigator.clipboard.writeText(textarea.value);
+
+  alert("Copied to clipboard!");
+}
+
 function generate() {
   if (!validateForm()) return;  // STOP if invalid
 
@@ -770,6 +796,18 @@ const birthGenderMap = {
   TTF: "Male"      // 🔥 assumption (AMAB → Female)
 };
 
+const advertText = `
+PUBLIC NOTICE
+
+It is for general information that I was previously known as ${oldNameFull} ${oldRel} ${data.father} R/O ${data.addr}, and after being diagnosed with Gender Dysphoria under the supervision of a registered medical practitioner in ${data.medPlace}, have changed my gender as ${newGen.toLowerCase()}.
+
+I henceforth be known as ${newNameFull}, ${newRel} ${data.father} R/O ${data.addr}. It is certified that I have complied with other legal requirements in the connection.
+
+${oldNameFull}
+`;
+
+document.getElementById("ad-output").value = advertText.trim();
+
 const birthGender = birthGenderMap[transition];
 
   // PAGE 1: PUBLIC NOTICE
@@ -792,8 +830,7 @@ const birthGender = birthGenderMap[transition];
 
   </div>`;
 
-document.getElementById("page1-preview").innerHTML =
-  document.getElementById("page1").innerHTML;
+
 
   document.getElementById("page2").innerHTML = `
 <div class="page">
@@ -1473,7 +1510,7 @@ new Paragraph({
             alignment: AlignmentType.RIGHT,
             children: [
               new TextRun({
-                text: "[signature (in existing old name)]",
+                text: "[Signature]",
                 size: 24
               })
             ]
