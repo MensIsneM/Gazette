@@ -815,9 +815,10 @@ document.getElementById("page3").innerHTML = `
   document.getElementById("page4").innerHTML = `
     <div class="page">
       <div class="title">UNDERTAKING</div>
+      <div class="title" style="margin-top:-20px; font-size:12pt;"></div>
       <div class="point">
         <div class="point-num">1.</div>
-        <div>I, ${oldNameFull}, ${oldRel} ${data.father}, residing at ${data.addr}, do hereby undertake that I ${oldNameFull} want to change my name to ${newNameFull} and gender as ${newGen}.div>
+        <div>I, ${oldNameFull}, ${oldRel} ${data.father}, residing at ${data.addr}, do hereby undertake that I ${oldNameFull} want to change my name to ${newNameFull} and gender as ${newGen}.</div>
       </div>
       <div class="point">
         <div class="point-num">2.</div>
@@ -827,11 +828,15 @@ document.getElementById("page3").innerHTML = `
         <div class="point-num">3.</div>
         <div>The above statement made by me is true and correct to the best of my knowledge and belief.If any legal issues arise in this regard at any stage, I will be personally responsible for the same and, the Department of Publication will not be liable for any consequences arising therefrom.</div>
       </div>
-      
-      <div class="sig-block" style="text-align: right;">
-        <b></b> ${formatNameWithAlias(oldNameFull)}
+      <div class="para">
+        <div class="point-num">3.</div>
+        <div>It is certified that I have complied with other legal requirements in this connectiondi</div>
       </div>
-	  ${getWitnessSection()}
+	   <div class="sig-block" style="text-align: right;">
+        ${formatNameWithAlias(oldNameFull)}
+      </div>
+      ${getWitnessSection()}
+     
     </div>`;
 
   // PAGE 3: SELF DECLARATION
@@ -851,7 +856,10 @@ document.getElementById("page3").innerHTML = `
         <div class="point-num">3.</div>
         <div>The above statement made by me is true and correct to the best of my knowledge and belief.If any legal issues arise in this regard at any stage, I will be personally responsible for the same and, the Department of Publication will not be liable for any consequences arising therefrom.</div>
       </div>
-      
+       <div class="para">
+        <div class="point-num">3.</div>
+        <div>It is certified that I have complied with other legal requirements in this connectiondi</div>
+      </div>
 	   <div class="sig-block" style="text-align: right;">
         ${formatNameWithAlias(oldNameFull)}
       </div>
@@ -875,7 +883,10 @@ document.getElementById("page3").innerHTML = `
         <div class="point-num">3.</div>
         <div>The above statement made by me is true and correct to the best of my knowledge and belief.If any legal issues arise in this regard at any stage, I will be personally responsible for the same and, the Department of Publication will not be liable for any consequences arising therefrom.</div>
       </div>
-      
+       <div class="para">
+        <div class="point-num">3.</div>
+        <div>It is certified that I have complied with other legal requirements in this connectiondi</div>
+      </div>
 	   <div class="sig-block" style="text-align: right;">
         ${formatNameWithAlias(oldNameFull)}
       </div>
