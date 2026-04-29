@@ -274,13 +274,13 @@ button:hover { opacity: 0.9; }
 transform-origin: top left;
   background: white;
   width: 210mm;
- height: mm;
-  padding: 0 20mm 20mm 20mm;
+
+  padding: 20mm 20mm 20mm 20mm;
   box-shadow: 0 0 15px rgba(0,0,0,0.1);
   box-sizing: border-box;
   font-family: "Times New Roman", Times, serif;
   color: black;
-  position: relative;
+  position: center;
 
   /* 🔥 ADD THESE ↓↓↓ */
   break-after: page;
@@ -572,7 +572,7 @@ function toggleAlias() {
 
 function getWitnessSection() {
   return `
-    <div style="margin-top: 60px;">
+    <div style="margin-top: 40px;">
       
       <b>Witness No. 1</b><br><br>
       Signature ________________________ Full Name ________________________<br><br>
@@ -1151,17 +1151,7 @@ function downloadCDDOCX() {
   downloadDOCX("printArea3", "CD");
 }
 
-<!-- function downloadPDF(areaId, filename) { -->
-<!--  const element = document.getElementById(areaId);-->
 
- <!-- html2pdf().set({-->
- <!--   margin: 0,-->
-  <!--  filename: filename + ".pdf",-->
-  <!--  html2canvas: { scale: 2 },-->
- <!--   jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },-->
- <!--   pagebreak: { mode: ['css', 'legacy'] }-->
- <!-- }).from(element).save();-->
-<!--}
 function downloadPDF() {
   const element = document.getElementById("printArea2");
   const opt = {
