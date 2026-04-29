@@ -480,8 +480,9 @@ transform-origin: top left;
   <h4>Export Options</h4>
   <button class="btn-docx" onclick="downloadAffidavitDOCX()">Download Affidavit (DOCX)</button>
   <button class="btn-cddocx" onclick="downloadCDDOCX()">Download CD Matter (DOCX)</button>
-  <button class="btn-pdf" onclick="downloadPDF()">Download as PDF</button>
-  <button onclick="downloadPDF_pdfmake()">Download PDF (Beta)</button>
+ <button class="btn-pdf" onclick="downloadPDF_pdfmake()">Download PDF</button>
+
+
   
 </div>
 </div>
@@ -1153,18 +1154,7 @@ function downloadCDDOCX() {
 }
 
 
-function downloadPDF() {
-  const element = document.getElementById("printArea2");
-  const opt = {
-  margin: 0,
-  filename: "Gazette.pdf",
-  image: { type: "jpeg", quality: 0.98 },
-  html2canvas: { scale: 2 },
-  jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-  pagebreak: { mode: ['css'] }
-};
- html2pdf().set(opt).from(element).save();
-}
+
 
 id="finaldocx"
 function downloadAffidavitDOCX() {
@@ -1530,136 +1520,193 @@ new Paragraph({
 }
 
 
+
+</script>
+<script src="assets/index.umd.cjs"></script>
+<script src="assets/pdfmake.min.js"></script>
+<script src="assets/vfs_fonts-times.js"></script>
+
+<script>
+
+
+  pdfMake.fonts = {
+  TimesNewRoman: {
+    normal: 'Times-Roman.ttf',
+    bold: 'Times-Bold.ttf',
+    italics: 'Times-Italic.ttf',
+    bolditalics: 'Times-BoldItalic.ttf'
+  }
+};
+  console.log("Fonts registered:", pdfMake.fonts);
+</script>
+
+<script>
+
+function b(text) {
+  return { text, bold: true };
+}
 function downloadPDF_pdfmake() {
   const result = generate();
   if (!result) return;
 
-  const {
-    newNameFull,
-    oldNameFull,
-    oldRel,
-    newRel,
-    oldGen,
-    newGen,
-    data
-  } = result;
+  // Ensure VFS and Fonts are correctly mapped
+ 
+  
+  
+  const fonts = {
+  TimesNewRoman: {
+    normal: 'Times-Roman.ttf',
+    bold: 'Times-Bold.ttf',
+    italics: 'Times-Italic.ttf',
+    bolditalics: 'Times-BoldItalic.ttf'
+  }
+};
 
-  const today = getFormattedDate();
+  const { newNameFull, oldNameFull, oldRel, newRel, oldGen, newGen, data } = result;
 
   const docDefinition = {
     pageSize: 'A4',
-    pageMargins: [40, 40, 40, 40], // [left, top, right, bottom]
-
+    pageMargins: [70, 70, 70, 70],
     defaultStyle: {
       font: 'TimesNewRoman',
       fontSize: 12
     },
-
-
-
-
     content: [
-
-      // ===== PAGE 1: UNDERTAKING =====
+	//Page UNDERTAKING
       {
-        text: 'UNDERTAKING',
-        style: 'header',
-        margin: [0, 0, 0, 20]
-      },
+  text: 'UNDERTAKING',
+  style: 'header',
+  alignment: 'center',
+  margin: [0, 0, 0, 30]
+},
 
-      {
-        text: [
-          { text: '1. ', bold: true },
-          `I ${oldNameFull}, ${oldRel} ${data.father}, assigned as ${oldGen} at the time of birth, residing at ${data.addr}, do hereby undertake that I ${oldNameFull} want to change my name to ${newNameFull} and gender as ${newGen}.`
-        ],
-        margin: [0, 0, 0, 10]
-      },
+{
+  columns: [
+    {
+      width: 20,
+      text: '1.',
+      bold: true
+    },
+    {
+      width: '*',
+  text: [
+    'I, ',
+    b(oldNameFull + ', '),
+    oldRel + ' ',
+    b(data.father + ', '),
+    'assigned as ',
+    b(oldGen + ' '),
+    'at the time of birth, residing at ',
+    data.addr + ', ',
+    'hereby undertake that I want to change my name as ',
+    b(newNameFull + ' '),
+    'gender as ',
+    b(newGen + '.')
+  ],
+  alignment: 'justify'
+    }
+  ],
+  margin: [0, 0, 20, 10],
+  lineHeight: 1.4,
+  columnGap: 5
+},
 
-      {
-        text: [
-          { text: '2. ', bold: true },
-          `I, ${oldNameFull} ${oldRel} ${data.father} henceforth be known as ${newNameFull}, ${newRel} ${data.father}.`
-        ],
-        margin: [0, 0, 0, 10]
-      },
+{
+columns: [
+    {
+      width: 20,
+      text: '2.',
+      bold: true
+    },
+    {
+      width: '*',
+  text: [
+    'I, ',
+    b(oldNameFull + ' '),
+    oldRel + ' ',
+    b(data.father + ' '),
+    'henceforth be known as ',
+    b(newNameFull + ', '),
+    newRel + ' ',
+    b(data.father + '.')
+  ],
+  alignment: 'justify'
+    }
+  ],
+  margin: [0, 0, 20, 10],
+  lineHeight: 1.4,
+  columnGap: 5
+},
 
-      {
-        text: [
-          { text: '3. ', bold: true },
-          `The above statement made by me is true and correct to the best of my knowledge and belief. If any legal issues arise in this regard at any stage, I will be personally responsible for the same and, the Department of Publication will not be liable for any consequences arising therefrom.`
-        ],
-        margin: [0, 0, 0, 20]
-      },
+{
+columns: [
+    {
+      width: 20,
+      text: '3.',
+      bold: true
+    },
+    {
+      width: '*',
+  text: [
+    'The above statement made by me is true and correct to the best of my knowledge and belief. ',
+    'If any legal issues arise in this regard at any stage, I will be personally responsible for the same and, ',
+    'the Department of Publication will not be liable for any consequences arising therefrom.'
+  ],
+  alignment: 'justify'
+    }
+  ],
+  margin: [0, 0, 20, 10],
+  lineHeight: 1.4,
+  columnGap: 5
+},
+
+{
+  text: oldNameFull,
+  alignment: 'right',
+  margin: [0, 20, 20, 60]
+},
+
+{
+  text: 'Witness No. 1',
+  bold: true,
+  lineHeight: 2
+},
+{
+text: ['Signature ________________________   Full Name_______________________________ ',
+'Address _______________________________________________________________ ',
+'\n',
+'Mobile / Phone No. ____________________________________',
+'\n'
+],
+ lineHeight: 2,
+  margin: [0, 0, 0, 60]
+},
+{
+  text: 'Witness No. 2',
+  bold: true,
+  lineHeight: 2
+},
+{
+text: ['Signature ________________________   Full Name_______________________________ ',
+'Address _______________________________________________________________ ',
+'\n',
+'Mobile / Phone No. ____________________________________',
+'\n'
+],
+ lineHeight: 2
+},
 
 
-       {
-	     text: [
-		 `It is certified that I have complied with other legal requirements in this connection.`
-	   ]
-	   },
-	   
-      {
-        text: oldNameFull,
-        alignment: 'right'
-      },
-
-      // 🔥 FORCE NEW PAGE
-      { text: '', pageBreak: 'after' },
-
-      // ===== PAGE 2: REQUEST LETTER =====
-      {
-        text: 'Request Letter',
-        style: 'header',
-        margin: [0, 0, 0, 20]
-      },
-
-      {
-        text: `To,
-The Controller of Publication,
-Department of Publication,
-Delhi.
-
-Respected Sir/Ma'am,
-
-I request publication of my name and gender change in the Gazette.
-
-Thanking you.
-
-Sincerely,
-${oldNameFull}`,
-        lineHeight: 1.4
-      }
-
-    ],
-
+	],
     styles: {
-      header: {
-        fontSize: 14,
-        bold: true,
-        alignment: 'center'
-      }
+      header: { fontSize: 14, bold: true }
     }
   };
 
-pdfMake.fonts = {
-    // All 4 components must be defined
-    TimesNewRoman: {
-        normal: 'Times.ttf',
-        bold: 'Timesbd.ttf',
-        italics: 'Timesi.ttf',
-        bolditalics: 'Timesbi.ttf'
-    }
-};
-
-  pdfMake.createPdf(docDefinition).download('Gazette.pdf');
+  // 🔥 FIX: Changed 'null' to '{}' to resolve the "Object expected" error
+  pdfMake.createPdf(docDefinition).download('Gazette_Documents.pdf');
 }
-
-
-
 </script>
-<script src="assets/html2pdf.bundle.min.js"></script>
-<script src="assets/index.umd.cjs"></script>
-<script src="assets/pdfmake.min.js"></script>
-<script src="assets/vfs_fonts.js"></script>
+
 </body>
 </html>
