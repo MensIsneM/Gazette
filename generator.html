@@ -283,11 +283,12 @@ transform-origin: top left;
   position: relative;
 
   /* 🔥 ADD THESE ↓↓↓ */
-  page-break-after: always;
   break-after: page;
 
   overflow: hidden;   /* prevents spill into next page */
 }
+
+
 
 .page * {
   page-break-inside: avoid;
@@ -486,7 +487,7 @@ transform-origin: top left;
 </div>
 
 
-<div style="display:none;">
+<div style="position:absolute; left:-9999px; top:0;">
  <div id="printArea1">
   <div id="page1"></div>
       <div id="page2"></div>
