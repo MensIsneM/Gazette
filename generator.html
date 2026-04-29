@@ -1551,7 +1551,7 @@ function downloadPDF_pdfmake() {
     pageMargins: [40, 40, 40, 40], // [left, top, right, bottom]
 
     defaultStyle: {
-      
+      font: 'TimesNewRoman',
       fontSize: 12
     },
 
@@ -1640,6 +1640,16 @@ ${oldNameFull}`,
       }
     }
   };
+
+pdfMake.fonts = {
+    // All 4 components must be defined
+    TimesNewRoman: {
+        normal: 'Times.ttf',
+        bold: 'Timesbd.ttf',
+        italics: 'Timesi.ttf',
+        bolditalics: 'Timesbi.ttf'
+    }
+};
 
   pdfMake.createPdf(docDefinition).download('Gazette.pdf');
 }
