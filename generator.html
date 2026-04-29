@@ -481,7 +481,8 @@ transform-origin: top left;
   <button class="btn-docx" onclick="downloadAffidavitDOCX()">Download Affidavit (DOCX)</button>
   <button class="btn-cddocx" onclick="downloadCDDOCX()">Download CD Matter (DOCX)</button>
   <button class="btn-pdf" onclick="downloadPDF()">Download as PDF</button>
-  <!-- <button class="btn-print" onclick="window.print()">Print Document Set</button> -->
+  <button onclick="downloadPDF_pdfmake()">Download PDF (Stable)</button>
+  
 </div>
 </div>
 </div>
@@ -1528,8 +1529,117 @@ new Paragraph({
   });
 }
 
+
+function downloadPDF_pdfmake() {
+  const result = generate();
+  if (!result) return;
+
+  const {
+    newNameFull,
+    oldNameFull,
+    oldRel,
+    newRel,
+    oldGen,
+    newGen,
+    data
+  } = result;
+
+  const today = getFormattedDate();
+
+  const docDefinition = {
+    pageSize: 'A4',
+    pageMargins: [40, 40, 40, 40], // [left, top, right, bottom]
+
+    defaultStyle: {
+      
+      fontSize: 12
+    },
+
+    content: [
+
+      // ===== PAGE 1: UNDERTAKING =====
+      {
+        text: 'UNDERTAKING',
+        style: 'header',
+        margin: [0, 0, 0, 20]
+      },
+
+      {
+        text: [
+          { text: '1. ', bold: true },
+          `I ${oldNameFull}, ${oldRel} ${data.father}, assigned as ${oldGen} at birth, residing at ${data.addr}, hereby declare that I wish to change my name to ${newNameFull} and gender to ${newGen}.`
+        ],
+        margin: [0, 0, 0, 10]
+      },
+
+      {
+        text: [
+          { text: '2. ', bold: true },
+          `I shall henceforth be known as ${newNameFull}, ${newRel} ${data.father}.`
+        ],
+        margin: [0, 0, 0, 10]
+      },
+
+      {
+        text: [
+          { text: '3. ', bold: true },
+          `The above statement is true to the best of my knowledge and belief.`
+        ],
+        margin: [0, 0, 0, 20]
+      },
+
+      {
+        text: oldNameFull,
+        alignment: 'right'
+      },
+
+      // 🔥 FORCE NEW PAGE
+      { text: '', pageBreak: 'after' },
+
+      // ===== PAGE 2: REQUEST LETTER =====
+      {
+        text: 'Request Letter',
+        style: 'header',
+        margin: [0, 0, 0, 20]
+      },
+
+      {
+        text: `To,
+The Controller of Publication,
+Department of Publication,
+Delhi.
+
+Respected Sir/Ma'am,
+
+I request publication of my name and gender change in the Gazette.
+
+Thanking you.
+
+Sincerely,
+${oldNameFull}`,
+        lineHeight: 1.4
+      }
+
+    ],
+
+    styles: {
+      header: {
+        fontSize: 14,
+        bold: true,
+        alignment: 'center'
+      }
+    }
+  };
+
+  pdfMake.createPdf(docDefinition).download('Gazette.pdf');
+}
+
+
+
 </script>
 <script src="assets/html2pdf.bundle.min.js"></script>
 <script src="assets/index.umd.cjs"></script>
+<script src="assets/pdfmake.min.js"></script>
+<script src="assets/vfs_fonts.js"></script>
 </body>
 </html>
