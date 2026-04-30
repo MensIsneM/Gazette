@@ -1577,7 +1577,8 @@ function downloadPDF_pdfmake() {
   text: 'UNDERTAKING',
   style: 'header',
   alignment: 'center',
-  margin: [0, 0, 0, 30]
+  margin: [0, 0, 0, 30],
+  decoration: 'underline'
 },
 
 {
@@ -1598,7 +1599,7 @@ function downloadPDF_pdfmake() {
     b(oldGen + ' '),
     'at the time of birth, residing at ',
     data.addr + ', ',
-    'hereby undertake that I want to change my name as ',
+    'hereby undertake that I want to change my name to ',
     b(newNameFull + ' '),
     'gender as ',
     b(newGen + '.')
@@ -1695,6 +1696,273 @@ text: ['Signature ________________________   Full Name__________________________
 ],
  lineHeight: 2
 },
+
+
+// page self delaration
+ {
+  text: 'SELF DECLARATION FOR CHANGE OF GENDER',
+  style: 'header',
+  alignment: 'center',
+  margin: [0, 0, 0, 10],
+  decoration: 'underline',
+  pageBreak: 'before' 
+},
+{
+  text: 'PUBLIC NOTICE',
+  style: 'header',
+  alignment: 'center',
+  margin: [0, 0, 0, 30],
+  decoration: 'underline'
+},
+{
+  columns: [
+    {
+      width: 20,
+      text: '1.',
+      bold: true
+    },
+    {
+      width: '*',
+  text: [
+    'I, ',
+    b(oldNameFull + ', '),
+    oldRel + ' ',
+    b(data.father + ', '),
+    'residing at ',
+    data.addr + ', ',
+    'hereby undertake that I ',
+	b(oldNameFull),
+	' want to change my name to ',
+    b(newNameFull + ' '),
+    'gender as ',
+    b(newGen + '.')
+  ],
+  alignment: 'justify'
+    }
+  ],
+  margin: [0, 0, 20, 10],
+  lineHeight: 1.4,
+  columnGap: 5
+},
+
+{
+columns: [
+    {
+      width: 20,
+      text: '2.',
+      bold: true
+    },
+    {
+      width: '*',
+  text: [
+    'I, ',
+    b(oldNameFull + ' '),
+    oldRel + ' ',
+    b(data.father + ' '),
+    'henceforth be known as ',
+    b(newNameFull + ', '),
+    newRel + ' ',
+    b(data.father + '.')
+  ],
+  alignment: 'justify'
+    }
+  ],
+  margin: [0, 0, 20, 10],
+  lineHeight: 1.4,
+  columnGap: 5
+},
+
+{
+columns: [
+    {
+      width: 20,
+      text: '3.',
+      bold: true
+    },
+    {
+      width: '*',
+  text: [
+    'The above statement made by me is true and correct to the best of my knowledge and belief. ',
+    'If any legal issues arise in this regard at any stage, I will be personally responsible for the same and, ',
+    'the Department of Publication will not be liable for any consequences arising therefrom.'
+  ],
+  alignment: 'justify'
+    }
+  ],
+  margin: [0, 0, 20, 10],
+  lineHeight: 1.4,
+  columnGap: 5
+},
+
+{
+  text: oldNameFull,
+  alignment: 'right',
+  margin: [0, 20, 20, 60]
+},
+
+{
+  text: 'Witness No. 1',
+  bold: true,
+  lineHeight: 2
+},
+{
+text: ['Signature ________________________   Full Name_______________________________ ',
+'Address _______________________________________________________________ ',
+'\n',
+'Mobile / Phone No. ____________________________________',
+'\n'
+],
+ lineHeight: 2,
+  margin: [0, 0, 0, 60]
+},
+{
+  text: 'Witness No. 2',
+  bold: true,
+  lineHeight: 2
+},
+{
+text: ['Signature ________________________   Full Name_______________________________ ',
+'Address _______________________________________________________________ ',
+'\n',
+'Mobile / Phone No. ____________________________________',
+'\n'
+],
+ lineHeight: 2
+},
+
+
+// page self declaration 2
+
+{
+  text: 'SELF DECLARATION FOR CHANGE OF GENDER',
+  style: 'header',
+  alignment: 'center',
+  margin: [0, 0, 0, 10],
+  decoration: 'underline',
+  pageBreak: 'before' 
+},
+{
+  text: 'PUBLIC NOTICE',
+  style: 'header',
+  alignment: 'center',
+  margin: [0, 0, 0, 30],
+  decoration: 'underline'
+},
+{
+  columns: [
+    {
+      width: 20,
+      text: '1.',
+      bold: true
+    },
+    {
+      width: '*',
+  text: [
+    'I, ',
+    b(oldNameFull + ', '),
+    oldRel + ' ',
+    b(data.father + ', '),
+    'residing at ',
+    data.addr + ', ',
+    'hereby undertake that I ',
+	b(oldNameFull),
+	' want to change my name to ',
+    b(newNameFull + ' '),
+    'gender as ',
+    b(newGen + '.')
+  ],
+  alignment: 'justify'
+    }
+  ],
+  margin: [0, 0, 20, 10],
+  lineHeight: 1.4,
+  columnGap: 5
+},
+
+{
+columns: [
+    {
+      width: 20,
+      text: '2.',
+      bold: true
+    },
+    {
+      width: '*',
+  text: [
+    'I, ',
+    b(oldNameFull + ' '),
+    oldRel + ' ',
+    b(data.father + ' '),
+    'henceforth be known as ',
+    b(newNameFull + ', '),
+    newRel + ' ',
+    b(data.father + '.')
+  ],
+  alignment: 'justify'
+    }
+  ],
+  margin: [0, 0, 20, 10],
+  lineHeight: 1.4,
+  columnGap: 5
+},
+
+{
+columns: [
+    {
+      width: 20,
+      text: '3.',
+      bold: true
+    },
+    {
+      width: '*',
+  text: [
+    'The above statement made by me is true and correct to the best of my knowledge and belief. ',
+    'If any legal issues arise in this regard at any stage, I will be personally responsible for the same and, ',
+    'the Department of Publication will not be liable for any consequences arising therefrom.'
+  ],
+  alignment: 'justify'
+    }
+  ],
+  margin: [0, 0, 20, 10],
+  lineHeight: 1.4,
+  columnGap: 5
+},
+
+{
+  text: oldNameFull,
+  alignment: 'right',
+  margin: [0, 20, 20, 60]
+},
+
+{
+  text: 'Witness No. 1',
+  bold: true,
+  lineHeight: 2
+},
+{
+text: ['Signature ________________________   Full Name_______________________________ ',
+'Address _______________________________________________________________ ',
+'\n',
+'Mobile / Phone No. ____________________________________',
+'\n'
+],
+ lineHeight: 2,
+  margin: [0, 0, 0, 60]
+},
+{
+  text: 'Witness No. 2',
+  bold: true,
+  lineHeight: 2
+},
+{
+text: ['Signature ________________________   Full Name_______________________________ ',
+'Address _______________________________________________________________ ',
+'\n',
+'Mobile / Phone No. ____________________________________',
+'\n'
+],
+ lineHeight: 2
+}
 
 
 	],
