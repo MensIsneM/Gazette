@@ -463,7 +463,7 @@ transform-origin: top left;
   <input id="med_place" placeholder="City">
 
   <label>Full Residential Address</label>
-  <textarea id="address" placeholder="Address" rows="3"></textarea>
+  <textarea id="address" rows="3" onkeydown="preventEnter(event)" oninput="normalizeAddress(this)"></textarea>
 
   <label>Phone Number</label>
   <input id="phone" value="+91 " oninput="handlePhoneInput(this)" onkeydown="protectPrefix(event, this)">
@@ -480,11 +480,10 @@ transform-origin: top left;
   <h4>Export Options</h4>
   <button class="btn-docx" onclick="downloadAffidavitDOCX()">Download Affidavit (DOCX)</button>
   <button class="btn-cddocx" onclick="downloadCDDOCX()">Download CD Matter (DOCX)</button>
- <button class="btn-pdf" onclick="downloadPDF_pdfmake()">Download PDF</button>
-
+ <button class="btn-pdf" onclick="downloadPDF_pdfmake()">Download Main Doc Bundle (PDF)</button>
+<button class="btn-envlp" onclick="downloadenvlp_pdfmake()">Download Posting Label (PDF)</button>
 
   
-</div>
 </div>
 </div>
 
@@ -539,6 +538,27 @@ function handleEmailInput(el) {
 
   // Lowercase (standard practice)
   value = value.toLowerCase();
+
+  el.value = value;
+}
+
+function preventEnter(e) {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+  }
+}
+
+function normalizeAddress(el) {
+  let value = el.value;
+
+  // replace ALL newlines (Enter key, pasted text) with space
+  value = value.replace(/[\r\n]+/g, ' ');
+
+  // collapse multiple spaces
+  value = value.replace(/\s+/g, ' ');
+
+  // trim edges
+  value = value.trim();
 
   el.value = value;
 }
@@ -747,6 +767,10 @@ function generate() {
   data.old = data.old.toUpperCase();
 data.new = data.new.toUpperCase();
 data.father = data.father.toUpperCase();
+data.addr = data.addr
+  .replace(/[\r\n]+/g, ' ')
+  .replace(/\s+/g, ' ')
+  .trim();
   
   const oldNameFull = (
   data.useAlias
@@ -978,7 +1002,7 @@ new Paragraph({
   alignment: AlignmentType.JUSTIFIED,
   children: [
     new TextRun({
-      text: `In witness whereof I have hereunto subscribed my former and adopted name/surname of ${oldNameFull} and of ${newNameFull} affix my signature and seal, if any, on this ${today}.`,
+      text: `In witness whereof I have hereunto subscribed my former and adopted name/surname of ${oldNameFull} and of ${newNameFull} affix my signature and seal, if any.`,
       size: 24
     })
   ],
@@ -990,7 +1014,6 @@ new Paragraph({
   alignment: AlignmentType.RIGHT,
   indent: {
     left: 550,
-    right: 400,
     hanging: 250
   },
   children: [
@@ -1005,7 +1028,6 @@ new Paragraph({
   alignment: AlignmentType.RIGHT,
   indent: {
     left: 550,
-    right: 0,
     hanging: 250
   },
   children: [
@@ -1066,7 +1088,7 @@ new Paragraph({
   children: [new TextRun({ text: "Place:", size: 24 })]
 }),
 new Paragraph({
-  children: [new TextRun({ text: `Date: ${today}`, size: 24 })]
+  children: [new TextRun({ text: "Date:", size: 24 })]
 })
 
         ] // ✅ closes children array
@@ -1149,17 +1171,6 @@ function downloadCDDOCX() {
             children: [
               new TextRun({
                 text: `3. The above statement made by me is true and correct to the best of my knowledge and belief. If any legal issues arise in this regard at any stage, I will be personally responsible for the same and Department of Publication will not be liable for any consequences arising therefrom.`,
-                size: 24
-              })
-            ],
-            spacing: { after: 400 }
-          }),
-
-new Paragraph({
-            alignment: AlignmentType.JUSTIFIED,
-            children: [
-              new TextRun({
-                text: `It is certified that I have complied with other legal requirements in this connection.`,
                 size: 24
               })
             ],
@@ -1274,7 +1285,7 @@ function downloadPDF_pdfmake() {
     'I, ',
     b(oldNameFull + ', '),
     oldRel + ' ',
-    b(data.father + ', '),
+    data.father + ', ',
     'assigned as ',
     b(oldGen + ' '),
     'at the time of birth, residing at ',
@@ -1303,13 +1314,13 @@ columns: [
       width: '*',
   text: [
     'I, ',
-    b(oldNameFull + ' '),
+    b(oldNameFull + ', '),
     oldRel + ' ',
-    b(data.father + ' '),
+    data.father + ', ',
     'henceforth be known as ',
     b(newNameFull + ', '),
     newRel + ' ',
-    b(data.father + '.')
+    data.father + '. '
   ],
   alignment: 'justify'
     }
@@ -1330,7 +1341,7 @@ columns: [
       width: '*',
   text: [
     'The above statement made by me is true and correct to the best of my knowledge and belief. ',
-    'If any legal issues arise in this regard at any stage, I will be personally responsible for the same and, ',
+    'If any legal issues arise in this regard at any stage, I will be personally responsible for the same and ',
     'the Department of Publication will not be liable for any consequences arising therefrom.'
   ],
   alignment: 'justify'
@@ -1407,7 +1418,7 @@ text: ['Signature ________________________   Full Name__________________________
     'I, ',
     b(oldNameFull + ', '),
     oldRel + ' ',
-    b(data.father + ', '),
+    data.father + ', ',
     'residing at ',
     data.addr + ', ',
     'hereby undertake that I ',
@@ -1436,13 +1447,13 @@ columns: [
       width: '*',
   text: [
     'I, ',
-    b(oldNameFull + ' '),
+    b(oldNameFull + ', '),
     oldRel + ' ',
-    b(data.father + ' '),
+    data.father + ', ',
     'henceforth be known as ',
     b(newNameFull + ', '),
     newRel + ' ',
-    b(data.father + '.')
+    data.father + '. '
   ],
   alignment: 'justify'
     }
@@ -1463,7 +1474,7 @@ columns: [
       width: '*',
   text: [
     'The above statement made by me is true and correct to the best of my knowledge and belief. ',
-    'If any legal issues arise in this regard at any stage, I will be personally responsible for the same and, ',
+    'If any legal issues arise in this regard at any stage, I will be personally responsible for the same and ',
     'the Department of Publication will not be liable for any consequences arising therefrom.'
   ],
   alignment: 'justify'
@@ -1541,7 +1552,7 @@ text: ['Signature ________________________   Full Name__________________________
     'I, ',
     b(oldNameFull + ', '),
     oldRel + ' ',
-    b(data.father + ', '),
+    data.father + ', ',
     'residing at ',
     data.addr + ', ',
     'hereby undertake that I ',
@@ -1570,13 +1581,13 @@ columns: [
       width: '*',
   text: [
     'I, ',
-    b(oldNameFull + ' '),
+    b(oldNameFull + ', '),
     oldRel + ' ',
-    b(data.father + ' '),
+    data.father + ', ',
     'henceforth be known as ',
     b(newNameFull + ', '),
     newRel + ' ',
-    b(data.father + '.')
+    data.father + '. '
   ],
   alignment: 'justify'
     }
@@ -1597,7 +1608,7 @@ columns: [
       width: '*',
   text: [
     'The above statement made by me is true and correct to the best of my knowledge and belief. ',
-    'If any legal issues arise in this regard at any stage, I will be personally responsible for the same and, ',
+    'If any legal issues arise in this regard at any stage, I will be personally responsible for the same and ',
     'the Department of Publication will not be liable for any consequences arising therefrom.'
   ],
   alignment: 'justify'
@@ -1706,6 +1717,9 @@ alignment: 'right'
     {
       width: '50%',             // 👈 limits width (3/4 page)
       stack: [
+	  '\n',
+	  { text: 'Signature:_________________________'},
+		'\n',
         { text: oldNameFull },
         { text: oldRel + ' ' + data.father },
         { text: 'R/o ' + data.addr },
@@ -1715,7 +1729,122 @@ alignment: 'right'
       alignment: 'right'
     }
   ],
-  margin: [0, 0, 0, 0],
+  margin: [0, 20, 0, 0],
+  lineHeight: 1.3
+},
+
+    // page cd-certificate
+{
+  text: 'CD-CERTIFICATE',
+  style: 'header',
+  alignment: 'center',
+  margin: [0, 0, 0, 30],
+  decoration: 'underline',
+  pageBreak: 'before' 
+},
+
+{ text: ['This is to certify that,', '\n', '\n', 'I, ', b(oldNameFull + ', '), oldRel + ' ', data.father + ', ', 'residing at ', data.addr + ', ', 'hereby declare:'],
+lineHeight: 1.3,
+margin: [0, 0, 0, 10]
+},
+{
+  columns: [
+    {
+      width: 20,
+      text: '1.',
+      bold: true
+    },
+    {
+      width: '*',
+  text: [
+    'That the matter in the CD and the hard copy is same and i am responsible for any mismatch.',
+    ],
+  alignment: 'justify'
+    }
+  ],
+  margin: [0, 0, 20, 0],
+  lineHeight: 1.3,
+  columnGap: 5
+},
+{
+  columns: [
+    {
+      width: 20,
+      text: '2.',
+      bold: true
+    },
+    {
+      width: '*',
+  text: [
+    'That i am responsible for quality of CD.',
+    ],
+  alignment: 'justify'
+    }
+  ],
+  margin: [0, 0, 20, 0],
+  lineHeight: 1.3,
+  columnGap: 5
+},
+{
+  columns: [
+    {
+      width: 20,
+      text: '3.',
+      bold: true
+    },
+    {
+      width: '*',
+  text: [
+    'That the CD is in MS Word format.',
+    ],
+  alignment: 'justify'
+    }
+  ],
+  margin: [0, 0, 20, 0],
+  lineHeight: 1.3,
+  columnGap: 5
+},
+{
+  columns: [
+    {
+      width: 20,
+      text: '4.',
+      bold: true
+    },
+    {
+      width: '*',
+  text: [
+    'That the above statement is true and correct.',
+    ],
+  alignment: 'justify'
+    }
+  ],
+  margin: [0, 0, 20, 10],
+  lineHeight: 1.4,
+  columnGap: 5
+},
+
+
+
+{
+  columns: [
+    { width: '*', text: '' },   // 👈 pushes content to right
+
+    {
+      width: '50%',             // 👈 limits width (3/4 page)
+      stack: [
+	    { text: 'Signature:_________________________'},
+		'\n',
+        { text: oldNameFull },
+        { text: oldRel + ' ' + data.father },
+        { text: 'R/o ' + data.addr },
+        { text: 'Phone number: ' + data.phone },
+        { text: 'Email: ' + data.email }
+      ],
+      alignment: 'right'
+    }
+  ],
+  margin: [0, 20, 0, 0],
   lineHeight: 1.3
 }
 	],
@@ -1726,7 +1855,80 @@ alignment: 'right'
 
   // 🔥 FIX: Changed 'null' to '{}' to resolve the "Object expected" error
   pdfMake.createPdf(docDefinition).download('Gazette_Documents.pdf');
-}
+};
+
+function downloadenvlp_pdfmake() {
+  const result = generate();
+  if (!result) return;
+
+  // Ensure VFS and Fonts are correctly mapped
+ 
+  
+  
+  const fonts = {
+  TimesNewRoman: {
+    normal: 'Times-Roman.ttf',
+    bold: 'Times-Bold.ttf',
+    italics: 'Times-Italic.ttf',
+    bolditalics: 'Times-BoldItalic.ttf'
+  }
+};
+
+const { oldNameFull,data } = result;
+  const docDefinition = {
+    pageSize: 'A4',
+    pageMargins: [50, 50, 50, 50],
+    defaultStyle: {
+      font: 'TimesNewRoman',
+      fontSize: 18
+    },
+    content: [
+
+
+{
+  columns: [
+    { width: '*', text: '' },   // 👈 pushes content to right
+
+    {
+      width: '50%',             // 👈 limits width (3/4 page)
+      stack: [
+	    { text: b('To,')},
+        { text: 'The Controller of Publication,' },
+        { text: 'Department of Publication,' },
+        { text: 'Near Vidhan Sabha Metro Station,' },
+		 { text: 'behind Old Vidhan Sabha,' },
+		 { text: 'Delhi-110054' },
+        
+      ],
+      alignment: 'left'
+    }
+  ],
+  margin: [0, 20, 0, 0],
+  lineHeight: 1.3
+ },
+ {
+  columns: [
+
+    {
+      width: '50%',             // 👈 limits width (3/4 page)
+      stack: [
+	    { text: b('From,')},
+        { text: data.old },
+        { text: data.addr },
+        { text: 'PH: ' + data.phone },
+        
+      ],
+      alignment: 'left'
+    },
+	{ width: '*', text: '' }
+  ],
+  margin: [0, 20, 0, 0],
+  lineHeight: 1.3
+ },
+	],
+};
+pdfMake.createPdf(docDefinition).download('Gazette_Label.pdf');
+};
 </script>
 
 </body>
