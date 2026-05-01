@@ -81,7 +81,7 @@ input, select, textarea {
 }
 
 #ad-output {
-  min-height: 120px;   /* 🔥 force visible height */
+  min-height: 120px; 
 }
 
 #visitor-counter {
@@ -140,7 +140,7 @@ input, select, textarea {
 }
 
 .container {
-  max-width: 400px;   /* 🔥 phone width */
+  max-width: 400px; 
   margin: auto;
   padding: 10px;
 }
@@ -163,9 +163,9 @@ button {
   background: #222;
   padding: 10px;
 
-  position: sticky;  /* 🔥 makes it stick */
-  top: 0;            /* stick to top */
-  z-index: 1000;     /* stay above content */
+  position: sticky; 
+  top: 0;            
+  z-index: 1000;    
 }
 
 .nav a {
@@ -182,12 +182,12 @@ button {
 }
 
 .nav-flag {
-  width: 40px;          /* adjust 30–50px */
+  width: 40px;         
   height: auto;
 
-  margin-center: auto;    /* pushes it to right */
+  margin-center: auto;   
 
-  image-rendering: pixelated; /* keeps crisp if pixel style */
+  image-rendering: pixelated; 
 
   opacity: 0.9;
   transition: transform 0.2s ease, opacity 0.2s ease;
@@ -208,7 +208,7 @@ button {
 
 .switch {
   position: relative;
-  display: inline-block;   /* 🔥 important */
+  display: inline-block; 
   width: 40px;
   height: 20px;
 }
@@ -282,10 +282,10 @@ transform-origin: top left;
   color: black;
   position: center;
 
-  /* 🔥 ADD THESE ↓↓↓ */
+ 
   break-after: page;
 
-  overflow: hidden;   /* prevents spill into next page */
+  overflow: hidden;   
 }
 
 
@@ -296,13 +296,13 @@ transform-origin: top left;
 }
 
 .estamp-space {
-  height: 700px; /* 🔥 adjust this */
+  height: 700px; 
 }
 .page1 {
   background: white;
   width: 70mm;
   min-height: 100mm;
-  padding: 10mm; /* Standard 1 inch margin */
+  padding: 10mm; 
   margin-bottom: 5px;
   box-shadow: 0 0 15px rgba(0,0,0,0.1);
   box-sizing: border-box;
@@ -330,12 +330,12 @@ transform-origin: top left;
 
 
 .nav-flag {
-  width: 40px;          /* adjust 30–50px */
+  width: 40px;        
   height: auto;
 
-  margin-left: auto;    /* pushes it to right */
+  margin-left: auto;    
 
-  image-rendering: pixelated; /* keeps crisp if pixel style */
+  image-rendering: pixelated; 
 
   opacity: 0.9;
   transition: transform 0.2s ease, opacity 0.2s ease;
@@ -370,7 +370,7 @@ transform-origin: top left;
   }
 
   #editor {
-    position: relative;   /* 🔥 kill sticky */
+    position: relative;  
     max-height: none;
     overflow: visible;
   }
@@ -406,7 +406,7 @@ transform-origin: top left;
   <img src="assets/trans.gif" class="nav-flag" alt="Trans Flag">
 </div>
 <div id="main-content">
-  <!-- your existing generator UI -->
+  
 
 <div id="app">
 <div id="editor">
@@ -536,7 +536,7 @@ function handleEmailInput(el) {
   // Remove spaces
   value = value.replace(/\s/g, '');
 
-  // Lowercase (standard practice)
+  // Lowercase 
   value = value.toLowerCase();
 
   el.value = value;
@@ -612,7 +612,7 @@ function getWitnessSection() {
 function getRelation(gender) {
   if (gender === "Male") return "S/o";
   if (gender === "Female") return "D/o";
-  return "Transgender of"; // your transgender case
+  return "Transgender of"; 
 }
 
 function showGeneratedToast() {
@@ -658,7 +658,7 @@ function buildAlias(name, a1, a2) {
 
   if (aliases.length === 0) return name.toUpperCase();
 
-  // 🔥 alias stays lowercase
+  
   return `${name.toUpperCase()} alias ${aliases.join(' alias ')}`;
 }
 
@@ -688,7 +688,7 @@ function validateForm() {
     }
   });
 
-  // ✅ 👇 ADD THIS BLOCK HERE
+  
   if (document.getElementById("use_alias").checked) {
     const oldA1 = document.getElementById("old_alias1").value.trim();
     const oldA2 = document.getElementById("old_alias2").value.trim();
@@ -707,7 +707,7 @@ function validateForm() {
   }
  const phone = document.getElementById("phone").value;
 
-  if (phone.length < 14) { // "+91 " + 10 digits
+  if (phone.length < 14) { 
   alert("Enter a valid 10-digit phone number");
   return false;
 }
@@ -727,7 +727,7 @@ function validateForm() {
 function protectPrefix(e, el) {
   const cursorPos = el.selectionStart;
 
-  // Prevent deleting +91
+  
   if (cursorPos <= 4 && (e.key === "Backspace" || e.key === "Delete")) {
     e.preventDefault();
   }
@@ -737,7 +737,7 @@ function copyAdText() {
   const textarea = document.getElementById("ad-output");
 
   textarea.select();
-  textarea.setSelectionRange(0, 99999); // mobile support
+  textarea.setSelectionRange(0, 99999); 
 
   navigator.clipboard.writeText(textarea.value);
 
@@ -745,7 +745,7 @@ function copyAdText() {
 }
 
 function generate() {
-  if (!validateForm()) return;  // STOP if invalid
+  if (!validateForm()) return;  
 
   const data = {
     old: document.getElementById('old_name').value,
@@ -828,8 +828,8 @@ const birthGenderMap = {
   FTM: "Female",
   MTT: "Male",
   FTT: "Female",
-  TTM: "Female",   // 🔥 assumption (AFAB → Male)
-  TTF: "Male"      // 🔥 assumption (AMAB → Female)
+  TTM: "Female",  
+  TTF: "Male"      
 };
 
 const advertText = `
@@ -904,7 +904,7 @@ function downloadAffidavitDOCX() {
         children: [
           new Paragraph({
             children: [new TextRun("")],
-            spacing: { before: 11000 } // 🔥 controls empty space
+            spacing: { before: 11000 } 
               }),
           // TITLE
           new Paragraph({
@@ -1091,10 +1091,10 @@ new Paragraph({
   children: [new TextRun({ text: "Date:", size: 24 })]
 })
 
-        ] // ✅ closes children array
+        ] 
       }
     ]
-  }); // ✅ closes Document
+  }); 
 
   Packer.toBlob(doc).then(blob => {
     const link = document.createElement("a");
@@ -1240,7 +1240,7 @@ function downloadPDF_pdfmake() {
   const result = generate();
   if (!result) return;
 
-  // Ensure VFS and Fonts are correctly mapped
+  
  
   
   
@@ -1712,10 +1712,10 @@ alignment: 'right'
 
 {
   columns: [
-    { width: '*', text: '' },   // 👈 pushes content to right
+    { width: '*', text: '' },   
 
     {
-      width: '50%',             // 👈 limits width (3/4 page)
+      width: '50%',             
       stack: [
 	  '\n',
 	  { text: 'Signature:_________________________'},
@@ -1828,10 +1828,10 @@ margin: [0, 0, 0, 10]
 
 {
   columns: [
-    { width: '*', text: '' },   // 👈 pushes content to right
+    { width: '*', text: '' },   
 
     {
-      width: '50%',             // 👈 limits width (3/4 page)
+      width: '50%',            
       stack: [
 	    { text: 'Signature:_________________________'},
 		'\n',
@@ -1853,7 +1853,7 @@ margin: [0, 0, 0, 10]
     }
   };
 
-  // 🔥 FIX: Changed 'null' to '{}' to resolve the "Object expected" error
+ 
   pdfMake.createPdf(docDefinition).download('Gazette_Documents.pdf');
 };
 
@@ -1861,7 +1861,7 @@ function downloadenvlp_pdfmake() {
   const result = generate();
   if (!result) return;
 
-  // Ensure VFS and Fonts are correctly mapped
+  
  
   
   
@@ -1887,10 +1887,10 @@ const { oldNameFull,data } = result;
 
 {
   columns: [
-    { width: '*', text: '' },   // 👈 pushes content to right
+    { width: '*', text: '' },  
 
     {
-      width: '50%',             // 👈 limits width (3/4 page)
+      width: '50%',            
       stack: [
 	    { text: b('To,')},
         { text: 'The Controller of Publication,' },
@@ -1910,7 +1910,7 @@ const { oldNameFull,data } = result;
   columns: [
 
     {
-      width: '50%',             // 👈 limits width (3/4 page)
+      width: '50%',             
       stack: [
 	    { text: b('From,')},
         { text: data.old },
