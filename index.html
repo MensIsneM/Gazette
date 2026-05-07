@@ -6,23 +6,26 @@
 <title>Gazette Guide</title>
 
 <style>
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   background: #DAB1DA;
   line-height: 1.6;
   overflow-x: hidden;
+}
 
 .container {
   width: 100%;
   max-width: 1000px;
   margin: auto;
   padding: 16px;
+  box-sizing: border-box;
 }
 
-h1 { font-size: 1.6rem; }
-h2 { font-size: 1.3rem; }
-h3 { font-size: 1.1rem; }
+h1 { font-size: 1.7rem; }
+h2 { font-size: 1.35rem; }
+h3 { font-size: 1.05rem; }
 
 p, li {
   font-size: 0.95rem;
@@ -30,88 +33,108 @@ p, li {
 
 .section {
   background: white;
-  padding: 16px;
-  margin-bottom: 16px;
-  border-radius: 10px;
-}
-
-img.placeholder {
-  width: 100%;
-  height: auto;
-  background: #ddd;
-  display: block;
-  margin-top: 10px;
-  border-radius: 6px;
+  padding: 18px;
+  margin-bottom: 18px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
 }
 
 img {
   width: 100%;
   height: auto;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.placeholder {
+  background: #ddd;
+  min-height: 180px;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 18px;
+  background: #3498db;
+  color: white;
+  text-decoration: none;
   border-radius: 6px;
+  font-size: 0.95rem;
 }
-
-.nav a {
-  font-size: 0.9rem;
-}
-
-.nav-flag {
-  margin-left: auto;
-}
-
-
-
 
 .nav {
   background: #222;
   padding: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 
-  position: sticky;  /* 🔥 makes it stick */
-  top: 0;            /* stick to top */
-  z-index: 1000;     /* stay above content */
-}
-
-.nav a {
-  color: white;
-  margin-right: 15px;
-  text-decoration: none;
-}
-
-.nav {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
 }
 
-.nav-flag {
-  width: 40px;          /* adjust 30–50px */
-  height: auto;
-
-  margin-center: auto;    /* pushes it to right */
-
-  image-rendering: pixelated; /* keeps crisp if pixel style */
-
-  opacity: 0.9;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-
-.btn {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 10px 15px;
-  background: #3498db;
+.nav a {
   color: white;
+  margin-right: 15px;
   text-decoration: none;
-  border-radius: 6px;
+  font-size: 0.92rem;
 }
 
-@media (min-width: 600px) {
-  .container {
-    padding: 20px;
-  }
+.nav-flag {
+  width: 40px;
+  height: auto;
+  margin-left: auto;
+  image-rendering: pixelated;
+  opacity: 0.9;
+}
 
-  h1 { font-size: 1.8rem; }
+details {
+  margin-top: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+  overflow: hidden;
+}
+
+summary {
+  cursor: pointer;
+  padding: 12px 14px;
+  font-weight: bold;
+  background: #f1f1f1;
+  user-select: none;
+}
+
+details[open] summary {
+  border-bottom: 1px solid #ddd;
+}
+
+.details-content {
+  padding: 14px;
+}
+
+.point {
+  margin-bottom: 14px;
+}
+
+.point h4 {
+  margin-bottom: 8px;
+}
+
+.ref-image {
+  margin-top: 12px;
+}
+
+.ref-image img {
+  background: #ddd;
+}
+
+.subpoint {
+  margin-left: 10px;
+  border-left: 3px solid #ddd;
+  padding-left: 12px;
+  margin-top: 10px;
 }
 
 @media (min-width: 768px) {
@@ -123,20 +146,12 @@ img {
     background: #111;
     color: white;
   }
-}
 
-  .section {
-    padding: 24px;
+  h1 {
+    font-size: 2.1rem;
   }
-
-  h1 { font-size: 2.2rem; }
 }
 
-.btn {
-  display: inline-block;
-  padding: 12px 18px;
-  font-size: 0.95rem;
-}
 </style>
 </head>
 
@@ -146,15 +161,16 @@ img {
   <a href="index.html">Guide</a>
   <a href="generator.html">Generator</a>
   <a href="ysupport.html" style="font-weight:bold;">Support</a>
-  
-   <img src="assets/trans.gif" class="nav-flag" alt="Trans Flag">
+
+  <img src="assets/trans.gif" class="nav-flag" alt="Trans Flag">
 </div>
 
 <div class="container">
 
 <!-- HERO -->
-<div class="section" id="intro">
+<div class="section">
   <h1>Central Gazette Name & Gender Change Guide</h1>
+
   <p>
     This guide explains the process of legally changing your name and gender
     through the Central Gazette in India.
@@ -164,197 +180,429 @@ img {
 </div>
 
 <!-- WHAT IS GAZETTE -->
-<div class="section" id="what-is-gazette">
-  <h2>What is a Gazette?</h2>
-  <p>
-    A Gazette is an official government publication used to notify the public about laws, 
-	policy changes, and important developments in India. It is also used for publishing 
-	personal changes such as name corrections or name changes. After the enactment of 
-	the Transgender Persons (Protection of Rights) Act, 2019, the Central Gazette (2020)
-	introduced a process for legally recognizing a person’s gender identity under the Act.
-	The procedure is broadly similar to a name-change notification, but it requires 
-	additional documents and specific conditions.
+<div class="section">
+  <h2>What is Gazette?</h2>
 
+  <p>
+    A Gazette is an official government publication used to notify the public
+    regarding laws, policy changes, and personal legal changes such as name change.
+  </p>
+
+  <p>
+    Under the Transgender Persons (Protection of Rights) Act, 2019, the Department
+    of Publication introduced a process to legally publish gender transition and
+    name change notifications in the Central Gazette.
   </p>
 </div>
 
 <!-- PREREQUISITES -->
-<div class="section" id="prerequisites">
+<div class="section">
   <h2>Prerequisites</h2>
-  <ul>
-<h3>Before starting your application, ensure you meet the following requirements:</h3>
-<li>You are at least <b>18 years of age</b></li>
-<li>Have a <b>GD/GID letter</b> from a registered medical practitioner</li>
-<li>Have a valid <b>email ID</b> and <b>phone number</b></li>
-<li>Have a <b>proof of identity</b></li>
-<li>Have <b>proof of address</b></li>
-<li>Have sufficient <b>funds to cover application and related costs</b></li>
 
-	
-	
-	
+  <ul>
+    <li>18 years or older</li>
+    <li>GD/GID letter from registered medical practitioner</li>
+    <li>Valid phone number</li>
+    <li>Valid email ID</li>
+    <li>Identity proof</li>
+    <li>Address proof</li>
+    <li>Sufficient funds for processing and travel/postal expenses</li>
   </ul>
 </div>
 
 <!-- MODES -->
-<div class="section" id="modes">
+<div class="section">
   <h2>Modes of Application</h2>
-<h3>(Scroll down for full guide)</h3>
- 
+
   <h3>1. Via Post</h3>
-  <p>No travel, slower, errors harder to fix - takes 2-3 months to process.</p>
-<h3>2. In Person</h3>
-  <p>Faster, reliable, requires travel to Delhi - takes 3-4 weeks to process.</p>
+  <p>No travel required. Slower processing. Errors are harder to rectify.</p>
+
+  <h3>2. In Person</h3>
+  <p>Faster and more reliable, but requires travel to Delhi.</p>
 
   <h3>3. Agents</h3>
-  <p>Convenient but risky and expensive</p>
-  <p> AGENTS USE THE POST mode, which takes 2-3 months, since this guide is gonna tell you how to post it yourself, <b>you'd not need a agent.</b></p>
+  <p>Convenient but expensive and risky. Most agents themselves use post mode.</p>
 </div>
 
+<!-- CREATION OF SUPPORTING DOCS -->
+<div class="section">
 
-<div class="section" id="creation-of-affidavit">
-<h2>CREATION OF AFFIDAVIT</h2>
-<p>Go to E-Stamp shop or create a estamp from online yourself.<p/>
+<h2>Creation of Supporting Documents</h2>
 
-<p>First party as dead name and second party as not available, and stamp duty paid by dead name</p>
+<!-- AFFIDAVIT -->
+<details>
+<summary>+ Affidavit</summary>
 
-<p>Then over-print the generated affidavit docx file onto it.</p>
-<p>Get witnesses to sign on the Affidavit</p>
-<p>Go to the Notary for sign and seal, ask for File entry + attatch a current passport photo.</p>
- <h3>Refference Affidavit</h3>
-  <img class="placeholder">
-<h2>posting advert in newspaper</h2>
-<p>The newspaper has to be 1 English or Hindi Language Naticonal daily</p>
-<p>It is conformed that only 1 newspaper is enough but i the above requirements</p>
-<p>Use the correct format generated in the tool</p>
-<p>Use recommended news paper like economic times, you can book an online order for newspaper advert via thier website link  https://ads.timesofindia.com/ here</p>
-<p>Book commercial ads>select catagory:tenders and notices>select type of advertisment:Display ad single colum>select ad design & city>I wish to place ad in : Banglore> Continue> > if your promted to sign in then plase do so, please use your dead name so invoice is in the dead name> header:Public notice> select individual editions:select the economic times banglore>no.of ads :1> publishing date:choose a date so you can plan that day for collecting physical copies as well> Compose ad> first box should be "PUBLIC NOTICE" : 2nd box should be the text copied from the generator tool and 3d box is full deadname> you will see a preview on the right, click on calculate and click on continue> click on "ad preview" download the preview pdf, and check the "i hereby approve..." box and proceed, you will be in the final checkout page, upload the AFFIDAVIT ALONG with gid letter, in the comment section type in "attached affidavit and gid", apply any promo code if available, and proceed to pay.</p>
+<div class="details-content">
 
-<p>Youll get a communication via email after booking, and if any issues they will reach out and via calls and email to rectify, make sure you read terms and conditions of cancelation if required</p>
-<p>Before you place the advert make sure that the newspaper's edition is readily availble to be bought in news stands or call any news agency distributors the previos  day of the advert day so they save like atleast 5-6 copies for you. dont need to tell them its for name change or genderchange, just simple extra copies of the newspaper,go to the agency office if you have to to collect. other way is swiping copies from multiple news-stands in your district.</p>
-<p>Keep the copies safe as youd need it for passport name change as well for future.</p>
-<h2>Making of cd</h2>
-<p>Get a xerox or cyber cafe to burn an empty cd (not dvd) and just past and burn the file generated by the tool onto the cd. older laptops/pc with cd can also burn a cd.</p>
-<p>Make photocopies of the documents, affidavit, aadhar, pan, passport, 10th markscard, gid letter, hrt medical intervention certificate,and a a4 xerox of the advert. its important to self attest, means sign with date. all these photocopies</p>
-<h2>print main docs</h2>
-<p>Make printout of the master documents from the generator tool, it contains 1 undertaking, 2 self declaration, 1 request letter, 1 cd certificate. print them all and get witness signs on undertaking and self declaration.</p>
-<h2>Take photocopies of the original docs</h2>
-<p>for all the original documents like aadhar gid affidavit, take b/w photocopies so you van self attest it and submit it for the application</p>
-<h2>witness sign and details</h2>
-<p>the documents like self declaration undertaking and affidavit (which you have already done)</p>
-</div>
-<div class="section" id="via-post">
-<h2>VIA POST</h2>
+<p>
+Create or purchase an E-Stamp paper. First party should be deadname and second
+party can be left as not available.
+</p>
 
-</div>      
-<!-- GENERATOR -->
-<div class="section" id="generator-info">
-  <h2>Document Generator</h2>
- 
-	
-<p>This is a Generator which will generate all required docs for this process, there is also an OFFLINE version if you are concerned about privacy.</p>
+<p>
+Print the affidavit DOCX generated by the tool onto the E-Stamp paper.
+</p>
 
-<p>Fill in your dead name, chosen name, father name/guardian name, address, MTF / FTM / FTT / MTT / TTM / TTF,  email, phone number, place.</p>
+<p>
+Get witness signatures and then notarize it with sign, seal and file entry.
+Attach passport size photo if required.
+</p>
 
-<p>It will output fully formatted documents like DOCX and PDF.</p>
+<div class="subpoint">
 
-<p>The DOCX files will be used for affidavit making and CD content for CD burning.</p>
+<h4>Notary</h4>
 
-<p>This will also generate a text For public notice newspaper adverts.</p>
+<p>
+Visit any practicing notary advocate. Ensure sign, seal and register/file entry
+are done properly.
+</p>
 
-<p>The PDF files should be printed in A4, these mainly contain proforma(self declaration), undertaking, CD certificate and Request letter.</p>
-
-
-  
-
-  <a href="generator.html" class="btn">Open Generator</a>
 </div>
 
-<!-- DOCUMENT LIST -->
-<div class="section" id="documents">
-  <h2>Documents Required</h2>
+<details class="ref-image">
+<summary>+ Reference Image</summary>
 
-  <p>Making of documents in order:</p>
- <ul>
-<li>Affidavit..........................................(DOCX)(Printed on a E-stamp paper and Notarized)</li>
-<li>Newspaper advert.........................(TEXT)(given to Newspaper advertizing)</li>
-<li>Undertaking...................................(PDF)(should print physical copies)</li>
-<li>Self declaration public notice........(PDF)(should print physical copies)</li>
-<li>Request letter................................(PDF)(should print physical copies)</li>
-<li>CD Burning....................................(DOCX)(burned on to the CD)</li>
-<li>CD Certificate................................(PDF)(should print physical copies)</li>
+<div class="details-content">
+<img src="" class="placeholder" alt="Affidavit Reference">
+</div>
+
+</details>
+
+</div>
+</details>
+
+<!-- NEWSPAPER -->
+<details>
+<summary>+ Newspaper Advertisement</summary>
+
+<div class="details-content">
+
+<p>
+One English or Hindi national daily newspaper is generally sufficient.
+</p>
+
+<p>
+Use the exact public notice format generated by the tool.
+</p>
+
+<p>
+Recommended newspapers include Economic Times and other widely circulated editions.
+</p>
+
+<p>
+Preserve multiple physical copies safely for future updates such as Passport.
+</p>
+
+<details class="ref-image">
+<summary>+ Reference Image</summary>
+
+<div class="details-content">
+<img src="" class="placeholder" alt="Newspaper Advert">
+</div>
+
+</details>
+
+<div class="subpoint">
+
+<h4>Collecting Physical Copies</h4>
+
+<p>
+Coordinate with local newspaper vendors or agencies beforehand to reserve copies.
+</p>
+
+<details class="ref-image">
+<summary>+ Reference Image</summary>
+
+<div class="details-content">
+<img src="" class="placeholder" alt="Physical Copies">
+</div>
+
+</details>
+
+</div>
+
+</div>
+</details>
+
+<!-- CD -->
+<details>
+<summary>+ Burning CD</summary>
+
+<div class="details-content">
+
+<p>
+Use a blank CD (not DVD). Burn only the DOCX content generated by the tool.
+</p>
+
+<p>
+Cyber cafes and xerox shops can usually perform CD burning if you do not own a CD writer.
+</p>
+
+<details class="ref-image">
+<summary>+ Reference Image</summary>
+
+<div class="details-content">
+<img src="" class="placeholder" alt="CD Burning">
+</div>
+
+</details>
+
+</div>
+</details>
+
+<!-- MAIN DOCS -->
+<details>
+<summary>+ Print Generated PDF Main Documents Bundle</summary>
+
+<div class="details-content">
+
+<p>
+Print all generated PDFs in A4 format including:
+</p>
+
+<ul>
+<li>Undertaking</li>
+<li>Self Declaration</li>
+<li>Request Letter</li>
+<li>CD Certificate</li>
 </ul>
-</div>
-
-<!-- IMAGE REFERENCES -->
-<div class="section" id="formats">
-  <h2>Reference Formats</h2>
-
-  <h3>Affidavit</h3>
-  <img class="placeholder" alt="affidavit image">
-
-  <h3>Newspaper Ad</h3>
-  <img class="placeholder">
-
-  <h3>Undertaking</h3>
-  <img class="placeholder">
-
-  <h3>CD Certificate</h3>
-  <img class="placeholder">
-</div>
-
-<!-- OFFICE -->
-<div class="section" id="office">
-  <h2>Gazette Office (Delhi)</h2>
-
-  <p><b>Address:</b> (Add actual address here)</p>
-
-  <h3>Route from Metro</h3>
-  <img class="placeholder">
-
-  <h3>Building Photos</h3>
-  <img class="placeholder">
-  
-   <h3>Work Flow</h3>
-   <img src="assets/DOP_Layout.webp" class="placeholder" alt="Dop Layout">
-  <img src="assets/route_map.webp" class="placeholder" alt="Route Map">
-</div>
-
-<!-- PROCESS -->
-<div class="section" id="process">
-  <h2>In-Person Process</h2>
-
-  <ol>
-    <li>Reach office early morning</li>
-    <li>Take token</li>
-    <li>Wait for your turn</li>
-    <li>Document verification</li>
-    <li>Submit CD and forms</li>
-  </ol>
-</div>
-
-<!-- CHECKLIST -->
-<div class="section" id="checklist">
-  <h2>Submission Checklist</h2>
-
-  <ul>
-    <li>Newspaper advertisement</li>
-    <li>Undertaking</li>
-    <li>Proforma</li>
-    <li>CD + certificate</li>
-    <li>ID proofs</li>
-    <li>Photos</li>
-  </ul>
-</div>
-
-<!-- CTA -->
-<div class="section" id="cta">
-  <h2>Ready?</h2>
-  <p>Generate your documents now.</p>
-
-  <a href="generator.html" class="btn">Go to Generator →</a>
-</div>
 
 </div>
+</details>
+
+<!-- PHOTOCOPIES -->
+<details>
+<summary>+ Photocopy of All Originals</summary>
+
+<div class="details-content">
+
+<p>
+Take black and white photocopies of all relevant documents such as:
+</p>
+
+<ul>
+<li>Aadhaar</li>
+<li>PAN</li>
+<li>Passport</li>
+<li>10th Marks Card</li>
+<li>GID Letter</li>
+<li>Affidavit</li>
+<li>Medical Intervention Certificates</li>
+<li>Newspaper Advertisement</li>
+</ul>
+
+</div>
+</details>
+
+<!-- WITNESSES -->
+<details>
+<summary>+ Witnesses</summary>
+
+<div class="details-content">
+
+<p>
+Witnesses must sign on Undertaking, Self Declaration and Affidavit where applicable.
+</p>
+
+</div>
+</details>
+
+<!-- SELF ATTEST -->
+<details>
+<summary>+ Self Attest</summary>
+
+<div class="details-content">
+
+<p>
+Sign and date photocopies before submission.
+</p>
+
+<details class="ref-image">
+<summary>+ Reference Image</summary>
+
+<div class="details-content">
+<img src="" class="placeholder" alt="Self Attest">
+</div>
+
+</details>
+
+</div>
+</details>
+
+</div>
+
+<!-- APPLY VIA POST -->
+<div class="section">
+
+<h2>Apply via Post</h2>
+
+<details open>
+<summary>+ Full Workflow</summary>
+
+<div class="details-content">
+
+<div class="point">
+<h4>1. Pay and Print Tax Challan on BharatKosh</h4>
+
+<p>
+Generate and pay Gazette publication fees through BharatKosh portal and print challan receipt.
+</p>
+
+<details class="ref-image">
+<summary>+ Reference Image</summary>
+
+<div class="details-content">
+<img src="" class="placeholder" alt="Bharatkosh">
+</div>
+
+</details>
+</div>
+
+<div class="point">
+<h4>2. Enclose Everything in Envelope</h4>
+
+<p>
+Arrange all original supporting documents, photocopies, CD, challan and generated forms neatly.
+</p>
+</div>
+
+<div class="point">
+<h4>3. Use the Post Label Generated by Tool</h4>
+
+<p>
+Print and paste generated postal label onto envelope.
+</p>
+</div>
+
+<div class="point">
+<h4>4. Submission at Any Post Office</h4>
+
+<p>
+Submit via Speed Post or Registered Post and preserve tracking slip safely.
+</p>
+</div>
+
+</div>
+</details>
+
+</div>
+
+<!-- APPLY IN PERSON -->
+<div class="section">
+
+<h2>Apply in Person</h2>
+
+<details open>
+<summary>+ Full Workflow</summary>
+
+<div class="details-content">
+
+<div class="point">
+<h4>Plan Trip to Department of Publication, Delhi</h4>
+
+<p>
+Plan accommodation, travel and document organization before arriving.
+</p>
+</div>
+
+<div class="point">
+<h4>Premises</h4>
+
+<details class="ref-image">
+<summary>+ Reference Image</summary>
+
+<div class="details-content">
+<img src="" class="placeholder" alt="Premises">
+</div>
+
+</details>
+</div>
+
+<div class="point">
+<h4>Queue</h4>
+
+<p>
+Arrive early morning to reduce waiting time.
+</p>
+
+<details class="ref-image">
+<summary>+ Reference Image</summary>
+
+<div class="details-content">
+<img src="" class="placeholder" alt="Queue">
+</div>
+
+</details>
+
+</div>
+
+<div class="point">
+<h4>Verification</h4>
+
+<p>
+Officials verify originals, photocopies and generated documents.
+</p>
+</div>
+
+<div class="point">
+<h4>Payment via Card</h4>
+
+<p>
+Carry debit/credit card and cash backup if required.
+</p>
+</div>
+
+</div>
+
+</details>
+
+</div>
+
+<!-- WAITING -->
+<div class="section">
+
+<h2>Checking and Waiting for Weekly Gazette Releases</h2>
+
+<p>
+Weekly Gazette releases are uploaded online. Publication may take multiple weeks depending on submission mode.
+</p>
+
+</div>
+
+<!-- FINAL PRINT -->
+<div class="section">
+
+<h2>Final Gazette Notification Usage</h2>
+
+<p>
+Print the relevant 2 Gazette pages containing your notification.
+</p>
+
+<p>
+Self attest the printed pages and attach passport size photograph where required for future document updates.
+</p>
+
+</div>
+
+<!-- GENERATOR -->
+<div class="section">
+
+<h2>Document Generator</h2>
+
+<p>
+The generator creates all required documents in PDF and DOCX format.
+</p>
+
+<p>
+There is also an offline version available for privacy-focused users.
+</p>
+
+<a href="generator.html" class="btn">Open Generator →</a>
+
+</div>
+
+</div>
+
 </body>
 </html>
