@@ -652,8 +652,8 @@ function formatNameWithAlias(full) {
   }).join("");
 }
 
-function buildAlias(name, a1, a2) {
-  const aliases = [a1, a2]
+function buildAlias(name, a1, a2, a3, a4) {
+  const aliases = [a1, a2, a3, a4]
     .filter(x => x && x.trim() !== '')
     .map(x => x.toUpperCase());
 
