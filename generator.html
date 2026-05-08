@@ -435,11 +435,11 @@ transform-origin: top left;
   <label>Old Name Alias 2</label>
   <input id="old_alias2" placeholder="Old name alias">
 
-  <label>New Name Alias 1</label>
-  <input id="new_alias1" placeholder="New name alias">
+  <label>Old Name Alias 3</label>
+  <input id="old_alias3" placeholder="Old name alias">
 
-  <label>New Name Alias 2</label>
-  <input id="new_alias2" placeholder="New name alias">
+  <label>Old Name Alias 4</label>
+  <input id="old_alias4" placeholder="Old name alias">
 
 </div>
 
@@ -693,10 +693,10 @@ function validateForm() {
   if (document.getElementById("use_alias").checked) {
     const oldA1 = document.getElementById("old_alias1").value.trim();
     const oldA2 = document.getElementById("old_alias2").value.trim();
-    const newA1 = document.getElementById("new_alias1").value.trim();
-    const newA2 = document.getElementById("new_alias2").value.trim();
+    const oldA3 = document.getElementById("old_alias3").value.trim();
+    const oldA4 = document.getElementById("old_alias4").value.trim();
 
-    if (!oldA1 && !oldA2 && !newA1 && !newA2) {
+    if (!oldA1 && !oldA2 && !oldA3 && !oldA4) {
       alert("You enabled aliases but didn’t enter any.");
       return false;
     }
@@ -760,8 +760,8 @@ function generate() {
 	dob: document.getElementById('dob').value,
 	oldAlias1: document.getElementById('old_alias1')?.value || '',
     oldAlias2: document.getElementById('old_alias2')?.value || '',
-    newAlias1: document.getElementById('new_alias1')?.value || '',
-    newAlias2: document.getElementById('new_alias2')?.value || '',
+    oldAlias3: document.getElementById('old_alias3')?.value || '',
+    oldAlias4: document.getElementById('old_alias4')?.value || '',
     useAlias: document.getElementById('use_alias').checked  
   };
   
@@ -775,13 +775,13 @@ data.addr = data.addr
   
   const oldNameFull = (
   data.useAlias
-    ? buildAlias(data.old, data.oldAlias1, data.oldAlias2)
+    ? buildAlias(data.old, data.oldAlias1, data.oldAlias2, data.oldAlias3, data.oldAlias4)
     : data.old
 );
 
   const newNameFull = (
   data.useAlias
-    ? buildAlias(data.new, data.newAlias1, data.newAlias2)
+    ? buildAlias(data.new)
     : data.new
 );
   const age = calculateAge(data.dob);
