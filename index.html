@@ -65,6 +65,7 @@ img {
 .nav {
   background: #222;
   padding: 10px;
+
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -85,9 +86,13 @@ img {
 .nav-flag {
   width: 40px;
   height: auto;
+
   margin-left: auto;
+
   image-rendering: pixelated;
   opacity: 0.9;
+
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 details {
@@ -143,7 +148,7 @@ details[open] summary {
   h1 {
     font-size: 2.1rem;
   }
-}
+
 
 </style>
 </head>
@@ -212,7 +217,7 @@ details[open] summary {
   <h3>1. Via Post</h3>
   <p>No travel required. Slower processing. Errors are harder to rectify.</p>
 
-  <h3>2. In Person <------   (HIGHLY RECOMMENDED)</h3>
+  <h3>2. In Person (HIGHLY RECOMMENDED)</h3>
   <p>Faster and more reliable, but requires travel to Delhi.</p>
 
   <h3>3. Agents</h3>
