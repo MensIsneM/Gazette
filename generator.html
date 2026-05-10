@@ -159,7 +159,41 @@ button {
   margin-top: 8px;
 }
 
+.offline-notice {
+  position: relative;
 
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 20px;
+
+  border-radius: 16px;
+
+  background: white;
+  border: 1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.close-offline {
+  position: absolute;
+  top: 8px;
+  right: 18px;
+
+  width: 50px;
+  height: 50px;
+
+  border: none;
+  border-radius: 100%;
+
+  background: red;
+
+  color: black;
+  font-size: 40px;
+  line-height: 0;
+
+  cursor: pointer;
+}
 .nav {
   background: transparent;
   padding: 8px;
@@ -469,11 +503,24 @@ transform-origin: top left;
 
 </div>
 <div id="main-content">
-  
 
-<div id="app">
-<div id="editor">
-  <h2>Application Data</h2>
+  <div class="offline-notice" id="offlineNotice">
+  <button class="close-offline" onclick="hideOfflineNotice()">×</button>
+
+  <h3>Offline Version Available</h3>
+
+  <p>
+    Use the generator completely offline for better privacy and reliability.
+  </p>
+
+  <a href="YOUR_OFFLINE_LINK_HERE" target="_blank" class="offline-btn">
+    Download Offline Version
+  </a>
+</div>
+
+  <div id="app">
+    <div id="editor">
+      <h2>Application Data</h2>
   
   <label>Full Old Name (Legal)</label>
   <input id="old_name" placeholder="Dead name">
@@ -582,7 +629,11 @@ transform-origin: top left;
   <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fmensisnem.github.io%2FGazette%2F&label=&countColor=%233498db" />
 </div>
 
-
+<script>
+function hideOfflineNotice() {
+  document.getElementById("offlineNotice").style.display = "none";
+}
+</script>
 <script>
 
 function toggleInfo(el) {
@@ -1235,7 +1286,7 @@ function downloadCDDOCX() {
             alignment: AlignmentType.JUSTIFIED,
             children: [
               new TextRun({
-                text: `1. I ${oldNameFull}, ${oldRel} ${data.father}, residing at ${data.addr}, do hereby undertake that I ${oldNameFull} want to change my name to ${newNameFull} and gender ${newGen}.`,
+                text: `I ${oldNameFull}, ${oldRel} ${data.father}, residing at ${data.addr}, do hereby undertake that I ${oldNameFull} want to change my name to ${newNameFull} and gender as ${newGen}.`,
                 size: 24
               })
             ],
@@ -1247,7 +1298,7 @@ function downloadCDDOCX() {
             alignment: AlignmentType.JUSTIFIED,
             children: [
               new TextRun({
-                text: `2. I ${oldNameFull} be henceforth be known as ${newNameFull}, ${newRel} ${data.father}.`,
+                text: `I ${oldNameFull} be henceforth be known as ${newNameFull}, ${newRel} ${data.father}.`,
                 size: 24
               })
             ],
@@ -1259,7 +1310,7 @@ function downloadCDDOCX() {
             alignment: AlignmentType.JUSTIFIED,
             children: [
               new TextRun({
-                text: `3. The above statement made by me is true and correct to the best of my knowledge and belief. If any legal issues arise in this regard at any stage, I will be personally responsible for the same and Department of Publication will not be liable for any consequences arising therefrom.`,
+                text: `The above statement made by me is true and correct to the best of my knowledge and belief. If any legal issues arise in this regard at any stage, I will be personally responsible for the same and Department of Publication will not be liable for any consequences arising therefrom.`,
                 size: 24
               })
             ],
