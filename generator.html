@@ -162,35 +162,29 @@ button {
 .nav {
   background: #222;
   padding: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 
-  position: sticky; 
-  top: 0;            
-  z-index: 1000;    
-}
-
-.nav a {
-  color: white;
-  margin-right: 15px;
-  text-decoration: none;
-}
-
-.nav {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
 }
 
+.nav a {
+  color: white;
+  margin-right: 15px;
+  text-decoration: none;
+  font-size: 0.92rem;
+}
+
 .nav-flag {
-  width: 40px;         
+  width: 40px;
   height: auto;
-
-  margin-center: auto;   
-
-  image-rendering: pixelated; 
-
+  margin-left: auto;
+  image-rendering: pixelated;
   opacity: 0.9;
-  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 .info-icon {
   position: relative;
@@ -375,17 +369,7 @@ transform-origin: top left;
 }
 
 
-.nav-flag {
-  width: 40px;        
-  height: auto;
 
-  margin-left: auto;    
-
-  image-rendering: pixelated; 
-
-  opacity: 0.9;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
 
 
 .title { text-align: center; font-weight: bold; font-size: 14pt; margin-bottom: 35px; text-transform: uppercase; }
@@ -449,7 +433,7 @@ transform-origin: top left;
   <a href="index.html">Guide</a>
   <a href="generator.html">Generator</a>
   <a href="State-gazette.html">State Gazette</a>
-   <a href="Check-Notification.html">Check Weekly Notification</a>
+  <a href="Check-Notification.html">Check Gezette</a>
   <a href="support.html" style="font-weight:bold;">Support</a>
   <img src="assets/trans.gif" class="nav-flag" alt="Trans Flag">
 </div>
