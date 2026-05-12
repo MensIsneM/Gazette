@@ -118,6 +118,31 @@ body {
   margin-top: 40px;
 }
 
+#google_translate_element {
+  margin-left: auto;
+}
+
+/* hide ugly google branding bits */
+.goog-logo-link,
+.goog-te-gadget span {
+  display: none !important;
+}
+
+.goog-te-gadget {
+  color: transparent !important;
+  font-size: 0 !important;
+}
+
+.goog-te-combo {
+  background: #333;
+  color: white;
+
+  border: none;
+  border-radius: 8px;
+
+  padding: 6px 10px;
+  font-size: 0.9rem;
+}
 
 
 
@@ -125,7 +150,17 @@ body {
 </head>
 
 <body>
+<script>
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    includedLanguages: 'en,hi,ta,kn,te,ml,bn,mr',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+  }, 'google_translate_element');
+}
+</script>
 
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <div class="nav">
 
   <a href="index.html" >Guide</a>
@@ -138,7 +173,7 @@ body {
   <a href="Check-Notification.html">Check Gazette</a>
   <a href="support.html" class="active">Support Me</a>
 
-
+<div id="google_translate_element"></div>
   <img src="assets/trans.gif" class="nav-flag" alt="Trans Flag">
 
 </div>
