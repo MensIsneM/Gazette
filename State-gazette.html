@@ -119,30 +119,60 @@ p {
   border-radius: 6px;
   font-size: 0.95rem;
 }
-#google_translate_element {
+.nav-right {
   margin-left: auto;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  flex-shrink: 0;
 }
 
-/* hide ugly google branding bits */
+/* translate container */
+#google_translate_element {
+  display: flex;
+  align-items: center;
+}
+
+/* hide ugly google text */
 .goog-logo-link,
 .goog-te-gadget span {
   display: none !important;
 }
 
 .goog-te-gadget {
+  font-size: 18 !important;
   color: transparent !important;
-  font-size: 0 !important;
 }
 
+/* dropdown */
 .goog-te-combo {
   background: #333;
+
   color: white;
 
   border: none;
   border-radius: 8px;
 
-  padding: 6px 10px;
-  font-size: 0.9rem;
+  padding: 6px 8px;
+
+  font-size: 13px;
+
+  cursor: pointer;
+
+  max-width: 90px;
+}
+
+/* trans flag */
+.nav-flag {
+  width: 40px;
+  height: auto;
+
+  image-rendering: pixelated;
+  opacity: 0.9;
+
+  flex-shrink: 0;
 }
 body {
   top: 0 !important;
@@ -150,6 +180,9 @@ body {
 
 .skiptranslate iframe {
   display: none !important;
+}
+.goog-te-gadget-simple {
+  background: transparent !important;
 }
 
 </style>
@@ -179,9 +212,13 @@ function googleTranslateElementInit() {
   <a href="Check-Notification.html" >Check Gazette</a>
   <a href="support.html" >Support Me</a>
 
-<div id="google_translate_element"></div>
-  <img src="assets/trans.gif" class="nav-flag" alt="Trans Flag">
+<div class="nav-right">
 
+    <div id="google_translate_element" alt="Translate"></div>
+
+    <img src="assets/trans.gif" class="nav-flag" alt="Trans Flag">
+
+  </div>
 </div>
 
 <div class="container">
