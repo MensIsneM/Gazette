@@ -158,6 +158,117 @@ input, select, textarea {
 button {
   margin-top: 8px;
 }
+.translate-wrapper {
+
+  position: relative;
+
+  width: 40px;
+  height: 40px;
+}
+
+.translate-icon {
+
+  width: 40px;
+  height: 40px;
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+.custom-language {
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 40px;
+  height: 40px;
+
+  opacity: 0;
+
+  cursor: pointer;
+
+  z-index: 2;
+}
+
+#google_translate_element {
+
+  position: absolute;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  z-index: -9999;
+}
+.skiptranslate iframe {
+  display: none !important;
+}
+.goog-te-gadget-simple {
+  background: transparent !important;
+}
+.flag-link {
+
+  background: transparent !important;
+
+  padding: 0 !important;
+
+  border-radius: 0 !important;
+
+  box-shadow: none !important;
+}
+
+.translate-wrapper {
+
+  position: relative;
+
+  width: 40px;
+  height: 40px;
+}
+
+.translate-icon {
+
+  width: 40px;
+  height: 40px;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+.translate-overlay {
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 40px;
+  height: 40px;
+
+  z-index: 2;
+
+  opacity: 0;
+}
+
+.goog-te-combo {
+
+  width: 40px !important;
+  height: 40px !important;
+
+  cursor: pointer;
+}
 
 .offline-notice {
   position: relative;
@@ -204,6 +315,40 @@ button {
   text-decoration: none;
 
   border-radius: 8px;
+}
+
+.footer {
+  text-align: center;
+  font-size: 18px;
+  color: #777;
+  margin-top: 40px;
+}
+.center {
+  text-align: center;
+}
+.container {
+  width: 100%;
+  max-width: 750px;
+  margin: auto;
+  padding: 16px;
+  box-sizing: border-box;
+}
+.section {
+  background: white;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+.btn {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 12px 18px;
+  background: #3498db;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
 }
 .nav {
   background: transparent;
@@ -375,6 +520,7 @@ input:checked + .slider:before {
 .btn-pdf { background: #F5A9B8; color: black; }
 .btn-cddocx { background: #5BCEFA; color: black; }
 .btn-docx { background: #F5A9B8; color: black; }
+.btn-envlp { background: #5BCEFA; color: black; }
 button:hover { opacity: 0.9; }
 
 /* PRINT/DOC STYLE - MIMICKING PDF SPACING */
@@ -504,22 +650,6 @@ transform-origin: top left;
   flex-shrink: 0;
 }
 
-/* translate container */
-#google_translate_element {
-  display: flex;
-  align-items: center;
-}
-
-/* hide ugly google text */
-.goog-logo-link,
-.goog-te-gadget span {
-  display: none !important;
-}
-
-.goog-te-gadget {
-  font-size: 18 !important;
-  color: transparent !important;
-}
 
 /* dropdown */
 .goog-te-combo {
@@ -553,43 +683,149 @@ body {
   top: 0 !important;
 }
 
-.skiptranslate iframe {
-  display: none !important;
+
+.support-btn {
+
+  position: relative;
+  overflow: hidden;
+
+  background: #333;
+
+  animation: supportGlow 4s ease-in-out infinite;
+
+  transition: 0.3s;
 }
-.goog-te-gadget-simple {
-  background: transparent !important;
+
+@keyframes supportGlow {
+
+  0% {
+    transform: scale(1);
+    background: #333;
+    box-shadow: 0 0 0 rgba(255,105,180,0);
+  }
+
+  25% {
+    background: #444;
+  }
+
+  50% {
+    transform: scale(1.05);
+
+    background: #ff77c8;
+
+    box-shadow:
+      0 0 14px rgba(255,105,180,0.5),
+      0 0 24px rgba(120,190,255,0.35);
+  }
+
+  75% {
+    background: #6bbcff;
+  }
+
+  100% {
+    transform: scale(1);
+
+    background: #333;
+
+    box-shadow: 0 0 0 rgba(255,105,180,0);
+  }
+
 }
+
 </style>
 </head>
 
 <body>
 <script>
+
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: 'en',
-    includedLanguages: 'en,hi,ta,kn,te,ml,bn,mr',
-    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    includedLanguages: 'en,hi,ta,kn,te,ml,bn,mr'
   }, 'google_translate_element');
 }
 </script>
+
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<script>
+let googleCombo = null;
+
+function waitForTranslate() {
+ 
+  googleCombo = document.querySelector(".goog-te-combo");
+
+  if (!googleCombo) {
+    setTimeout(waitForTranslate, 500);
+  }
+}
+
+waitForTranslate();
+
+function changeLanguage(lang) {
+  if (!googleCombo) {
+    console.log("Google Translate not ready yet");
+    return;
+  }
+
+
+  googleCombo.value = lang;
+  
+  
+  googleCombo.dispatchEvent(new Event("change", { bubbles: true }));
+}
+</script>
 <div class="nav">
 
   <a href="index.html" >Guide</a>
 
   <a href="generator.html" class="active">Generator</a>
-
+<a href="faq.html">FAQ</a>
   
   <a href="State-gazette.html">State Gazette</a>
 
   <a href="Check-Notification.html">Check Gazette</a>
-  <a href="support.html" >Support Me</a>
+   <a href="support.html" class="support-btn">
+  Support Me 🙏
+</a>
 
 <div class="nav-right">
+<div class="translate-wrapper">
 
-    <div id="google_translate_element" alt="Translate"></div>
+  <img src="assets/ccc.png"
+       alt="Translate"
+       class="translate-icon">
 
-    <img src="assets/trans.gif" class="nav-flag" alt="Trans Flag">
+  <select class="custom-language notranslate" onchange="changeLanguage(this.value)">
+
+    
+
+    <option value="hi">हिन्दी</option>
+
+    <option value="kn">ಕನ್ನಡ</option>
+
+    <option value="ta">தமிழ்</option>
+
+    <option value="te">తెలుగు</option>
+
+    <option value="ml">മലയാളം</option>
+
+    <option value="bn">বাংলা</option>
+
+    <option value="mr">मराठी</option>
+
+    <option value="en">English</option>
+
+  </select>
+
+  <div id="google_translate_element"></div>
+
+</div>
+    <a href="support.html" class="flag-link" title="Support this project 🩷">
+  <img src="assets/trans.gif"
+       class="nav-flag"
+       alt="Support Project">
+</a>
 
   </div>
 
@@ -695,9 +931,11 @@ function googleTranslateElementInit() {
 
 <button onclick="copyAdText()">Copy Advert Text</button>
   <h4>Export Options</h4>
+  <h3>Please download all the below files!</h3>
   <button class="btn-docx" onclick="downloadAffidavitDOCX()">Download Affidavit Matter(DOCX)</button>
   <button class="btn-cddocx" onclick="downloadCDDOCX()">Download CD Matter (DOCX)</button>
  <button class="btn-pdf" onclick="downloadPDF_pdfmake()">Download Main Doc Bundle (PDF)</button>
+  <h3>Extra for Via Post submission</h3>
 <button class="btn-envlp" onclick="downloadenvlp_pdfmake()">Download Posting Label (PDF)</button>
 
   
@@ -2169,6 +2407,45 @@ const { oldNameFull,data } = result;
 pdfMake.createPdf(docDefinition).download('Gazette_Label.pdf');
 };
 </script>
+</div>
+<div class="container">
+<div class="section">
 
+<h2>Support This Project 🙏</h2>
+
+<p>
+This website is independently built and maintained by a trans person trying to make Gazette procedures easier, safer and more accessible for everyone.
+</p>
+
+<p>
+If this tool helped you save money, avoid agents, reduce confusion or navigate the process more easily, please consider supporting the project.
+</p>
+
+<a href="support.html" class="btn">
+Support Me / Donate →
+</a>
+
+</div>
+<!-- CONTACT / LINKS -->
+<div class="section center">
+  <h3>Connect</h3>
+
+  
+  <a class="btn" href="https://github.com/MensIsneM/Gazette" target="_blank">
+    This project is on GitHub
+  </a>
+
+  <br><br>
+
+  <a class="btn" href="mailto:mensisnem.dev@gmail.com">
+    Contact Me for any Questions
+  </a>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Built by a Trans Person with LOVE, MensIsneM
+</div>
+</div>
 </body>
 </html>

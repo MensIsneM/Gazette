@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ - Gazette Guide</title>
+
+<style>
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #DAB1DA;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+.container {
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.section {
+  background: white;
+  padding: 18px;
+  margin-bottom: 18px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.4rem; }
+h3 { font-size: 1.1rem; }
+
+p, li {
+  font-size: 0.96rem;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 18px;
+  background: #3498db;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.nav {
+  background: transparent;
+  padding: 8px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.nav a {
+  color: white;
+  text-decoration: none;
+
+  background: #333;
+
+  padding: 8px 8px;
+  border-radius: 500px;
+
+  font-size: 0.9rem;
+  transition: 0.2s;
+}
+
+.nav a:hover {
+  background: #444;
+}
+
+.nav a.active {
+  background: #9bd4fa;
+  color: black;
+  font-weight: bold;
+}
+
+.nav-right {
+  margin-left: auto;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  flex-shrink: 0;
+}
+
+.translate-wrapper {
+
+  position: relative;
+
+  width: 40px;
+  height: 40px;
+}
+
+.translate-icon {
+
+  width: 40px;
+  height: 40px;
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+.custom-language {
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 40px;
+  height: 40px;
+
+  opacity: 0;
+
+  cursor: pointer;
+
+  z-index: 2;
+}
+.center {
+  text-align: center;.section {
+}  background: white;
+.footer {  padding: 20px;
+  text-align: center;  margin-top: 20px;
+  font-size: 18px;  border-radius: 12px;
+  color: #777;  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+  margin-top: 40px;}
+}
+.section {
+  background: white;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+.footer {
+  text-align: center;
+  font-size: 18px;
+  color: #777;
+  margin-top: 40px;
+}
+#google_translate_element {
+
+  position: absolute;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  z-index: -9999;
+}
+.skiptranslate iframe {
+  display: none !important;
+}
+.goog-te-gadget-simple {
+  background: transparent !important;
+}
+.flag-link {
+
+  background: transparent !important;
+
+  padding: 0 !important;
+
+  border-radius: 0 !important;
+
+  box-shadow: none !important;
+}
+
+.translate-wrapper {
+
+  position: relative;
+
+  width: 40px;
+  height: 40px;
+}
+
+.translate-icon {
+
+  width: 40px;
+  height: 40px;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+.translate-overlay {
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 40px;
+  height: 40px;
+
+  z-index: 2;
+
+  opacity: 0;
+}
+
+.goog-te-combo {
+
+  width: 40px !important;
+  height: 40px !important;
+
+  cursor: pointer;
+}
+
+
+
+
+.nav-flag {
+  width: 40px;
+  height: auto;
+  image-rendering: pixelated;
+  opacity: 0.9;
+  flex-shrink: 0;
+}
+
+body {
+  top: 0 !important;
+}
+
+
+details {
+  margin-top: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+  overflow: hidden;
+}
+
+summary {
+  cursor: pointer;
+  padding: 12px 14px;
+  font-weight: bold;
+  background: #DAB1DA;
+  user-select: none;
+}
+
+details[open] summary {
+  border-bottom: 1px solid #ddd;
+  background: #9bd4fa;
+}
+
+.details-content {
+  padding: 14px;
+}
+
+.subpoint {
+  margin-top: 12px;
+}
+
+.info-box {
+  background: #eef7ff;
+  border-left: 4px solid #3498db;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 12px;
+}
+
+.warning-box {
+  background: #fff3cd;
+  border-left: 4px solid #ff9800;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 12px;
+}
+
+.danger-box {
+  background: #ffe5e5;
+  border-left: 4px solid #e53935;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 12px;
+}
+
+.last-reviewed {
+  opacity: 0.7;
+  font-size: 0.85rem;
+  margin-top: 10px;
+}
+.support-btn {
+
+  position: relative;
+  overflow: hidden;
+
+  background: #333;
+
+  animation: supportGlow 4s ease-in-out infinite;
+
+  transition: 0.3s;
+}
+
+@keyframes supportGlow {
+
+  0% {
+    transform: scale(1);
+    background: #333;
+    box-shadow: 0 0 0 rgba(255,105,180,0);
+  }
+
+  25% {
+    background: #444;
+  }
+
+  50% {
+    transform: scale(1.05);
+
+    background: #ff77c8;
+
+    box-shadow:
+      0 0 14px rgba(255,105,180,0.5),
+      0 0 24px rgba(120,190,255,0.35);
+  }
+
+  75% {
+    background: #6bbcff;
+  }
+
+  100% {
+    transform: scale(1);
+
+    background: #333;
+
+    box-shadow: 0 0 0 rgba(255,105,180,0);
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<script>
+// 1. Removed the 'layout' property so the standard combo box generates
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    includedLanguages: 'en,hi,ta,kn,te,ml,bn,mr'
+  }, 'google_translate_element');
+}
+</script>
+
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<script>
+let googleCombo = null;
+
+function waitForTranslate() {
+  // Looks for the standard translate dropdown
+  googleCombo = document.querySelector(".goog-te-combo");
+
+  if (!googleCombo) {
+    setTimeout(waitForTranslate, 500);
+  }
+}
+
+waitForTranslate();
+
+function changeLanguage(lang) {
+  if (!googleCombo) {
+    console.log("Google Translate not ready yet");
+    return;
+  }
+
+  // Set the value to the chosen language
+  googleCombo.value = lang;
+  
+  // 2. Added { bubbles: true } so Google's listener actually hears the change
+  googleCombo.dispatchEvent(new Event("change", { bubbles: true }));
+}
+</script>
+<div class="nav">
+
+  <a href="index.html">Guide</a>
+  <a href="generator.html">Generator</a>
+  <a href="faq.html" class="active">FAQ</a>
+  <a href="State-gazette.html">State Gazette</a>
+  <a href="Check-Notification.html">Check Gazette</a>
+  <a href="support.html" class="support-btn">
+  Support Me 🙏
+</a>
+
+<div class="nav-right">
+<div class="translate-wrapper">
+
+  <img src="assets/ccc.png"
+       alt="Translate"
+       class="translate-icon">
+
+  <select class="custom-language notranslate" onchange="changeLanguage(this.value)">
+
+    
+
+    <option value="hi">हिन्दी</option>
+
+    <option value="kn">ಕನ್ನಡ</option>
+
+    <option value="ta">தமிழ்</option>
+
+    <option value="te">తెలుగు</option>
+
+    <option value="ml">മലയാളം</option>
+
+    <option value="bn">বাংলা</option>
+
+    <option value="mr">मराठी</option>
+
+    <option value="en">English</option>
+
+  </select>
+
+  <div id="google_translate_element"></div>
+
+</div>
+    <a href="support.html" class="flag-link" title="Support this project 🩷">
+  <img src="assets/trans.gif"
+       class="nav-flag"
+       alt="Support Project">
+</a>
+
+  </div>
+
+</div>
+
+<div class="container">
+
+<!-- HERO -->
+<div class="section">
+
+<h1>Frequently Asked Questions</h1>
+
+<p>
+Common doubts regarding Gazette name and gender change,
+documents, timelines, publication, privacy and website usage.
+</p>
+
+<div class="warning-box">
+This website is an independent informational project and is not affiliated with the Government of India.
+Please verify important legal requirements through official government sources whenever possible.
+</div>
+
+<a href="generator.html" class="btn">Open Document Generator →</a>
+
+</div>
+
+<!-- GENERAL -->
+<div class="section">
+
+<h2>General Questions</h2>
+
+<details>
+<summary>What is a Gazette notification?</summary>
+
+<div class="details-content">
+
+<p>
+A Gazette notification is an official government publication used to publicly record legal changes such as name change and gender change.
+</p>
+
+<details class="subpoint">
+<summary>ⓘ More Info</summary>
+
+<div class="details-content">
+
+<p>
+Once published, the notification becomes part of public government records and can later be used for updating documents such as Aadhaar, PAN, Passport and bank records.
+</p>
+
+</div>
+</details>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+<details>
+<summary>Is this website official government website?</summary>
+
+<div class="details-content">
+
+<p>
+No. This is an independent informational project created to simplify the Gazette process.
+</p>
+
+<div class="warning-box">
+Official Gazette publications are handled through government portals such as egazette.gov.in and BharatKosh.
+</div>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+<details>
+<summary>Why was this website created?</summary>
+
+<div class="details-content">
+
+<p>
+The Gazette process is confusing, fragmented and difficult for many people to understand. This project aims to simplify the process using guides, generators and tools.
+</p>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+<details>
+<summary>Is this guide free?</summary>
+
+<div class="details-content">
+
+<p>
+Yes. The guide and generator are provided free of cost.
+</p>
+
+<div class="info-box">
+Some government fees, newspaper charges, printing costs and travel expenses still apply separately.
+</div>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+</div>
+
+<!-- ELIGIBILITY -->
+<div class="section">
+
+<h2>Eligibility & Legal Questions</h2>
+
+<details>
+<summary>Do I need surgery for Gazette notification?</summary>
+
+<div class="details-content">
+
+<p>
+No. Surgery is generally not required for Gazette publication.
+</p>
+
+<details class="subpoint">
+<summary>ⓘ More Info</summary>
+
+<div class="details-content">
+
+<p>
+Current Gazette workflows are usually based on declarations and supporting documentation rather than proof of surgery itself.
+</p>
+
+</div>
+</details>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+<details>
+<summary>Can I change both name and gender together?</summary>
+
+<div class="details-content">
+
+<p>
+Yes. Both name and gender changes are commonly combined into a single Gazette notification.
+</p>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+<details>
+<summary>Do I need court order?</summary>
+
+<div class="details-content">
+
+<p>
+Usually no. Most Gazette applications are processed without requiring a court order.
+</p>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+<details>
+<summary>Can minors apply?</summary>
+
+<div class="details-content">
+
+<p>
+Minor applications may require parent or guardian involvement and additional documentation.
+</p>
+
+<div class="warning-box">
+Minor procedures may differ significantly. Please verify current legal requirements carefully.
+</div>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+<details>
+<summary>Can I apply from another state?</summary>
+
+<div class="details-content">
+
+<p>
+Yes. Central Gazette applications are commonly submitted by people living across different states.
+</p>
+
+<details class="subpoint">
+<summary>ⓘ More Info</summary>
+
+<div class="details-content">
+
+<p>
+Address proof and supporting documents are generally more important than the state you currently reside in.
+</p>
+
+</div>
+</details>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+<details>
+<summary>What is the difference between Central Gazette and State Gazette?</summary>
+
+<div class="details-content">
+
+<p>
+Central Gazette is handled through the Department of Publication under the Government of India, while State Gazettes are handled separately by individual states.
+</p>
+
+<div class="warning-box">
+State Gazette procedures vary heavily between states and may not always support gender and name change together.
+</div>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+</div>
+
+<!-- DOCUMENTS -->
+<div class="section">
+
+<h2>Documents & Requirements</h2>
+
+<details>
+<summary>What documents are usually required?</summary>
+
+<div class="details-content">
+
+<ul>
+<li>Identity proof</li>
+<li>Address proof</li>
+<li>Affidavit</li>
+<li>Newspaper advertisement</li>
+<li>Passport photos</li>
+<li>GID/GD letter or supporting documentation</li>
+<li>Government fee receipt</li>
+</ul>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+<details>
+<summary>What is a GID/GD letter?</summary>
+
+<div class="details-content">
+
+<p>
+It generally refers to supporting medical or psychological documentation related to gender dysphoria/gender identity.
+</p>
+
+<div class="warning-box">
+Requirements may change over time depending on administrative practice and legal updates.
+</div>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+<details>
+<summary>Is newspaper advertisement mandatory?</summary>
+
+<div class="details-content">
+
+<p>
+In most cases, yes. Newspaper publication is commonly included as part of the process.
+</p>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+<details>
+<summary>Why is CD required?</summary>
+
+<div class="details-content">
+
+<p>
+The Department of Publication traditionally requests soft-copy document submission through CD media.
+</p>
+
+<div class="info-box">
+Requirements may modernize in future, but CD submission is still commonly used currently.
+</div>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+<details>
+<summary>Can I use black and white photocopies?</summary>
+
+<div class="details-content">
+
+<p>
+Usually yes for supporting photocopies, unless specifically requested otherwise.
+</p>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+</div>
+
+<!-- TIMELINE -->
+<div class="section">
+
+<h2>Timeline & Publication</h2>
+
+<details>
+<summary>How long does Gazette publication take?</summary>
+
+<div class="details-content">
+
+<p>
+Publication may take several weeks depending on workload, holidays, submission method and verification.
+</p>
+
+<div class="info-box">
+In-person applications are often processed faster than postal applications.
+</div>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+<details>
+<summary>How do I know if my Gazette is published?</summary>
+
+<div class="details-content">
+
+<p>
+You must regularly check weekly Gazette PDF releases through the eGazette portal.
+</p>
+
+<details class="subpoint">
+<summary>ⓘ More Info</summary>
+
+<div class="details-content">
+
+<p>
+Search terms such as "gender as" inside Part IV weekly Gazette PDFs may help locate entries faster.
+</p>
+
+</div>
+</details>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+<details>
+<summary>Why can’t I find my name?</summary>
+
+<div class="details-content">
+
+<p>
+Publication may still be pending, delayed or placed inside a different weekly issue.
+</p>
+
+<div class="warning-box">
+Do not panic immediately. Delays of multiple weeks are common.
+</div>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+<details>
+<summary>Which Gazette category should I search?</summary>
+
+<div class="details-content">
+
+<p>
+Most gender and name change notifications are usually published under:
+</p>
+
+<ul>
+<li>Weekly Gazette</li>
+<li>Part IV</li>
+</ul>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+</div>
+
+<!-- PRIVACY -->
+<div class="section">
+
+<h2>Privacy & Safety</h2>
+
+<details>
+<summary>Is Gazette public?</summary>
+
+<div class="details-content">
+
+<p>
+Yes. Gazette notifications are public government records.
+</p>
+
+<div class="danger-box">
+Please understand that old and new names may become publicly searchable after publication.
+</div>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+<details>
+<summary>Will my old name remain visible?</summary>
+
+<div class="details-content">
+
+<p>
+Usually yes. Gazette notifications generally contain both previous and updated details.
+</p>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+<details>
+<summary>Can employers or others search it?</summary>
+
+<div class="details-content">
+
+<p>
+Potentially yes, because Gazette publications are public records.
+</p>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+<details>
+<summary>Can Gazette publication be removed later?</summary>
+
+<div class="details-content">
+
+<p>
+Usually no. Gazette publications are intended to remain part of public records once published.
+</p>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+</div>
+
+<!-- WEBSITE -->
+<div class="section">
+
+<h2>Website & Generator Questions</h2>
+
+<details>
+<summary>Does the generator upload my information?</summary>
+
+<div class="details-content">
+
+<p>
+The offline version is designed to function locally on your device without needing server uploads.
+</p>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+<details>
+<summary>Is the offline version safer?</summary>
+
+<div class="details-content">
+
+<p>
+Generally yes, because documents are generated directly on your own device.
+</p>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+<details>
+<summary>Is my data stored by this website?</summary>
+
+<div class="details-content">
+
+<p>
+This project attempts to minimize data collection wherever possible.
+</p>
+
+<div class="warning-box">
+Always avoid uploading unnecessary sensitive personal information online.
+</div>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+<details>
+<summary>How can I support this project?</summary>
+
+<div class="details-content">
+
+<p>
+You can support through donations, sharing the guide or reporting outdated information and corrections.
+</p>
+
+<a href="support.html" class="btn">Support Project →</a>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+<details>
+<summary>Can I report incorrect or outdated information?</summary>
+
+<div class="details-content">
+
+<p>
+Yes. Administrative procedures change often, so corrections and updates are always appreciated.
+</p>
+
+<p class="last-reviewed">Last reviewed: May 2026</p>
+
+</div>
+</details>
+
+</div>
+
+<!-- FOOTER -->
+<div class="section">
+
+<h2>Important Reminder</h2>
+
+<p>
+Government procedures, fees and document requirements may change over time.
+Always double-check important legal or administrative details before submission.
+</p>
+
+<a href="index.html" class="btn">Return to Main Guide →</a>
+
+</div>
+ <div class="section">
+
+<h2>Support This Project 🙏</h2>
+
+<p>
+This website is independently built and maintained by a trans person trying to make Gazette procedures easier, safer and more accessible for everyone.
+</p>
+
+<p>
+If this tool helped you save money, avoid agents, reduce confusion or navigate the process more easily, please consider supporting the project.
+</p>
+
+<a href="support.html" class="btn">
+Support Me / Donate →
+</a>
+
+</div>
+<!-- CONTACT / LINKS -->
+<div class="section center">
+  <h3>Connect</h3>
+
+  
+  <a class="btn" href="https://github.com/MensIsneM/Gazette" target="_blank">
+    This project is on GitHub
+  </a>
+
+  <br><br>
+
+  <a class="btn" href="mailto:mensisnem.dev@gmail.com">
+    Contact Me for any Questions
+  </a>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Built by a Trans Person with LOVE, MensIsneM
+</div>
+</div>
+
+</body>
+</html>

@@ -87,9 +87,9 @@ body {
   margin: 20px auto;
 }
 
-.qr img {
-  width: 180px;
-  height: 180px;
+.image {
+  width: 150px;
+  height: 150px;
   background: white;
   padding: 10px;
   border-radius: 10px;
@@ -128,41 +128,117 @@ body {
   flex-shrink: 0;
 }
 
-/* translate container */
-#google_translate_element {
-  display: flex;
-  align-items: center;
+.translate-wrapper {
+
+  position: relative;
+
+  width: 40px;
+  height: 40px;
 }
 
-/* hide ugly google text */
-.goog-logo-link,
-.goog-te-gadget span {
-  display: none !important;
+.translate-icon {
+
+  width: 40px;
+  height: 40px;
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  pointer-events: none;
+
+  z-index: 1;
 }
 
-.goog-te-gadget {
-  font-size: 18 !important;
-  color: transparent !important;
-}
+.custom-language {
 
-/* dropdown */
-.goog-te-combo {
-  background: #333;
+  position: absolute;
 
-  color: white;
+  top: 0;
+  left: 0;
 
-  border: none;
-  border-radius: 8px;
+  width: 40px;
+  height: 40px;
 
-  padding: 6px 8px;
-
-  font-size: 13px;
+  opacity: 0;
 
   cursor: pointer;
 
-  max-width: 90px;
+  z-index: 2;
 }
 
+#google_translate_element {
+
+  position: absolute;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  z-index: -9999;
+}
+.skiptranslate iframe {
+  display: none !important;
+}
+.goog-te-gadget-simple {
+  background: transparent !important;
+}
+.flag-link {
+
+  background: transparent !important;
+
+  padding: 0 !important;
+
+  border-radius: 0 !important;
+
+  box-shadow: none !important;
+}
+
+.translate-wrapper {
+
+  position: relative;
+
+  width: 40px;
+  height: 40px;
+}
+
+.translate-icon {
+
+  width: 40px;
+  height: 40px;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+.translate-overlay {
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 40px;
+  height: 40px;
+
+  z-index: 2;
+
+  opacity: 0;
+}
+
+.goog-te-combo {
+
+  width: 40px !important;
+  height: 40px !important;
+
+  cursor: pointer;
+}
 /* trans flag */
 .nav-flag {
   width: 40px;
@@ -177,46 +253,208 @@ body {
   top: 0 !important;
 }
 
-.skiptranslate iframe {
-  display: none !important;
-}
-.goog-te-gadget-simple {
-  background: transparent !important;
+
+.support-btn {
+
+  position: relative;
+  overflow: hidden;
+
+  background: #333;
+
+  animation: supportGlow 4s ease-in-out infinite;
+
+  transition: 0.3s;
 }
 
+@keyframes supportGlow {
+
+  0% {
+    transform: scale(1);
+    background: #333;
+    box-shadow: 0 0 0 rgba(255,105,180,0);
+  }
+
+  25% {
+    background: #444;
+  }
+
+  50% {
+    transform: scale(1.05);
+
+    background: #ff77c8;
+
+    box-shadow:
+      0 0 14px rgba(255,105,180,0.5),
+      0 0 24px rgba(120,190,255,0.35);
+  }
+
+  75% {
+    background: #6bbcff;
+  }
+
+  100% {
+    transform: scale(1);
+
+    background: #333;
+
+    box-shadow: 0 0 0 rgba(255,105,180,0);
+  }
+
+}
+.donate-wrapper {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 40px;
+
+  flex-wrap: wrap;
+
+  margin-top: 25px;
+}
+
+.donate-left {
+  text-align: center;
+}
+
+.donate-btn {
+
+  display: inline-block;
+
+  padding: 14px 22px;
+
+  background: #2ecc71;
+
+  color: white;
+  text-decoration: none;
+
+  border-radius: 8px;
+
+  font-size: 1rem;
+
+  transition: 0.25s;
+}
+
+.donate-btn:hover {
+  transform: scale(1.05);
+  background: #29b765;
+}
+
+.donate-thankyou {
+
+  margin-top: 14px;
+
+  font-size: 0.92rem;
+
+  opacity: 0.75;
+}
+
+.qr-image {
+
+  width: 320px;
+  max-width: 90vw;
+
+  border-radius: 18px;
+
+  box-shadow: 0 4px 18px rgba(0,0,0,0.12);
+}
 
 </style>
 </head>
 
 <body>
 <script>
+// 1. Removed the 'layout' property so the standard combo box generates
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: 'en',
-    includedLanguages: 'en,hi,ta,kn,te,ml,bn,mr',
-    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    includedLanguages: 'en,hi,ta,kn,te,ml,bn,mr'
   }, 'google_translate_element');
 }
 </script>
 
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<script>
+let googleCombo = null;
+
+function waitForTranslate() {
+  // Looks for the standard translate dropdown
+  googleCombo = document.querySelector(".goog-te-combo");
+
+  if (!googleCombo) {
+    setTimeout(waitForTranslate, 500);
+  }
+}
+
+waitForTranslate();
+
+function changeLanguage(lang) {
+  if (!googleCombo) {
+    console.log("Google Translate not ready yet");
+    return;
+  }
+
+  // Set the value to the chosen language
+  googleCombo.value = lang;
+  
+  // 2. Added { bubbles: true } so Google's listener actually hears the change
+  googleCombo.dispatchEvent(new Event("change", { bubbles: true }));
+}
+</script>
+
 <div class="nav">
 
   <a href="index.html" >Guide</a>
 
   <a href="generator.html">Generator</a>
 
-  
+  <a href="faq.html">FAQ</a>
   <a href="State-gazette.html">State Gazette</a>
 
   <a href="Check-Notification.html">Check Gazette</a>
-  <a href="support.html" class="active">Support Me</a>
+  <a href="support.html" class="support-btn">
+  Support Me 🙏
+</a>
 
 <div class="nav-right">
+<div class="translate-wrapper">
 
-    <div id="google_translate_element" alt="Translate"></div>
+  <img src="assets/ccc.png"
+       alt="Translate"
+       class="translate-icon">
 
-    <img src="assets/trans.gif" class="nav-flag" alt="Trans Flag">
+  <select class="custom-language notranslate" onchange="changeLanguage(this.value)">
+
+    
+
+    <option value="hi">हिन्दी</option>
+
+    <option value="kn">ಕನ್ನಡ</option>
+
+    <option value="ta">தமிழ்</option>
+
+    <option value="te">తెలుగు</option>
+
+    <option value="ml">മലയാളം</option>
+
+    <option value="bn">বাংলা</option>
+
+    <option value="mr">मराठी</option>
+
+    <option value="en">English</option>
+
+  </select>
+
+  <div id="google_translate_element"></div>
+
+</div>
+    <a href="support.html" class="flag-link" title="Support this project 🩷">
+  <img src="assets/trans.gif"
+       class="nav-flag"
+       alt="Support Project">
+</a>
 
   </div>
 
@@ -262,19 +500,51 @@ function googleTranslateElementInit() {
 </div>
 
 <!-- UPI SUPPORT -->
-<div class="section center">
-  <h2>Please Donate🙏</h2>
+<!-- DONATION SECTION -->
+<div class="section">
 
- 
-<p>Any amount is welcome!</p>
-  <!-- OPTIONAL UPI LINK -->
-  <a class="btn" href="https://razorpay.me/@mensisnem" target="_blank">
-    Donate via Razorpay
-  </a>
+  <h2 style="text-align:center;">Please Donate🙏</h2>
 
-  <div class="note">
-    Thank you so much!🩷🩵
+  <p style="text-align:center;">
+    Any amount is welcome!
+  </p>
+
+  <div class="donate-wrapper">
+
+    <!-- LEFT -->
+    <div class="donate-left" align=left>
+
+      <a href="https://razorpay.me/@mensisnem" target="_blank" class="donate-btn">
+        Donate via Razorpay
+      </a>
+
+     
+    </div>
+<div class="donate-center" align=center>
+
+      <p class="donate-thankyou">
+        OR
+      </p>
+
+    </div>
+    <!-- RIGHT -->
+    <div class="donate-right" align=right>
+
+      <img src="assets/razorpay-qr.png"
+           alt="Razorpay QR"
+           class="qr image">
+
+    </div>
+
   </div>
+<div class="donate">
+
+      <p class="donate" align=center>
+        Thank you so much 🙏
+      </p>
+
+     
+    </div>
 </div>
 
 
