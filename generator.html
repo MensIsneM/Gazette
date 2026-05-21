@@ -1,19 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="stylesheet" href="assets/styles.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gazette Doc Maker</title>
 
 <style>
-/* UI & PREVIEW SPLIT */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  background: #DAB1DA;
-  line-height: 1.6;
-  overflow-x: hidden;
-}
 
 #printArea2 {
   margin: 0;
@@ -45,7 +38,14 @@ body {
   max-height: 90vh;
   overflow-y: auto;
 }
-
+#editor button {
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: bold;
+}
 #page1-preview-box {
   margin-top: 20px;
   padding: 10px;
@@ -139,12 +139,6 @@ input, select, textarea {
   transform: translateX(-50%) translateY(0);
 }
 
-.container {
-  max-width: 500px; 
-  margin: auto;
-  padding: 10px;
-}
-
 #ad-output {
   width: 100%;
   padding: 12px;
@@ -153,104 +147,6 @@ input, select, textarea {
   border-radius: 6px;
   resize: none;
   background: #fafafa;
-}
-
-button {
-  margin-top: 8px;
-}
-.translate-wrapper {
-
-  position: relative;
-
-  width: 40px;
-  height: 40px;
-  overflow: hidden;
-}
-
-.translate-icon {
-
-  width: 40px;
-  height: 40px;
-
-  position: absolute;
-
-  top: 0;
-  left: 0;
-
-  pointer-events: none;
-
-  z-index: 1;
-}
-
-.custom-language {
-
-  position: absolute;
-
-  top: 0;
-  left: 0;
-
-  width: 40px;
-  height: 40px;
-
-  opacity: 0;
-
-  cursor: pointer;
-
-  z-index: 2;
-}
-
-#google_translate_element {
-
-  position: absolute;
-
-  opacity: 0;
-
-  pointer-events: none;
-
-  z-index: -9999;
-}
-.skiptranslate iframe {
-  display: none !important;
-}
-.goog-te-gadget-simple {
-  background: transparent !important;
-}
-.flag-link {
-
-  background: transparent !important;
-
-  padding: 0 !important;
-
-  border-radius: 0 !important;
-
-  box-shadow: none !important;
-}
-
-
-
-
-
-.translate-overlay {
-
-  position: absolute;
-
-  top: 0;
-  left: 0;
-
-  width: 40px;
-  height: 40px;
-
-  z-index: 2;
-
-  opacity: 0;
-}
-
-.goog-te-combo {
-
-  width: 40px !important;
-  height: 40px !important;
-
-  cursor: pointer;
 }
 
 .offline-notice {
@@ -300,97 +196,6 @@ button {
   border-radius: 8px;
 }
 
-.footer {
-  text-align: center;
-  font-size: 18px;
-  color: #777;
-  margin-top: 40px;
-}
-.center {
-  text-align: center;
-}
-.container {
-  width: 100%;
-  max-width: 750px;
-  margin: auto;
-  padding: 16px;
-  box-sizing: border-box;
-}
-.section {
-  background: white;
-  padding: 20px;
-  margin-top: 20px;
-  border-radius: 12px;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-}
-.btn {
-  display: inline-block;
-  margin-top: 18px;
-  padding: 12px 18px;
-  background: #3498db;
-  color: white;
-  text-decoration: none;
-  border-radius: 6px;
-  font-size: 0.95rem;
-}
-.nav {
-  background: transparent;
-  padding: 8px;
-
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  flex-wrap: wrap;
-}
-
-.nav a {
-  color: white;
-  text-decoration: none;
-
-  background: #333;
-
-  padding: 8px 8px;
-  border-radius: 500px;
-
-  font-size: 0.9rem;
-
-  transition: 0.2s;
-}
-
-.nav a:hover {
-  background: #444;
-}
-
-.nav a.active {
-  background: #9bd4fa;
-  color: black;
-  font-weight: bold;
-}
-
-.nav-flag {
-  width: 36px;
-  height: auto;
- margin-right: 15px;
-  margin-left: auto;
-
-  image-rendering: pixelated;
-  opacity: 1;
-}
-
-.info-icon {
-  position: relative;
-  display: inline-block;
-  margin-left: 10px;
-  font-size: 20px;
-  color: #555;
-  cursor: pointer;
-}
-
 .info-box {
   display: none;
   position: absolute;
@@ -406,40 +211,6 @@ button {
   width: 200px;
   
   z-index: 1000;
-}
-
-/* little arrow */
-.info-box::after {
-  content: "";
-  position: right;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 6px;
-  border-style: solid;
-  border-color: #222 transparent transparent transparent;
-}
-
-/* Desktop hover support */
-.info-icon:hover .info-box {
-  display: block;
-}
-
-/* Active state for mobile */
-.info-icon.active .info-box {
-  display: block;
-}
-
-button {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  cursor: pointer;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
-  font-size: 0.95rem;
-  transition: opacity 0.1s;
 }
 
 .switch {
@@ -498,14 +269,6 @@ input:checked + .slider:before {
   transform: translateX(20px);
 }
 
-.btn-generate { background: #3498db; color: black; }
-.btn-print { background: #5BCEFA; color: black; }
-.btn-pdf { background: #F5A9B8; color: black; }
-.btn-cddocx { background: #5BCEFA; color: black; }
-.btn-docx { background: #F5A9B8; color: black; }
-.btn-envlp { background: #5BCEFA; color: black; }
-button:hover { opacity: 0.9; }
-
 /* PRINT/DOC STYLE - MIMICKING PDF SPACING */
 .page {
 transform-origin: top left;
@@ -524,8 +287,6 @@ transform-origin: top left;
 
   overflow: hidden;   
 }
-
-
 
 .page * {
   page-break-inside: avoid;
@@ -565,10 +326,6 @@ transform-origin: top left;
   flex: 1;
 }
 
-
-
-
-
 .title { text-align: center; font-weight: bold; font-size: 14pt; margin-bottom: 35px; text-transform: uppercase; }
 .para { line-height: 1.1; text-align: justify; margin-bottom: 20px; font-size: 12pt; }
 .point { margin-left: 0; margin-bottom: 15px; line-height: 1.1; font-size: 12pt; display: flex; }
@@ -576,10 +333,6 @@ transform-origin: top left;
 .sig-block { margin-top: 60px; line-height: 1.4; }
 .address-block { margin-bottom: 30px; line-height: 1.4; }
 .para1 { line-height: 1.0; text-align: justify; margin-bottom: 0px; font-size: 10pt; }
-
-
-
-
 
 @media (min-width: 768px) {
   body::before {
@@ -617,103 +370,11 @@ transform-origin: top left;
   }
 }
 
-
 @page {
   size: A4;
   margin: 0;
 }
 
-.nav-right {
-  margin-left: auto;
-
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  flex-shrink: 0;
-}
-
-
-/* dropdown */
-.goog-te-combo {
-  background: #333;
-
-  color: white;
-
-  border: none;
-  border-radius: 8px;
-
-  padding: 6px 8px;
-
-  font-size: 13px;
-
-  cursor: pointer;
-
-  max-width: 90px;
-}
-
-/* trans flag */
-.nav-flag {
-  width: 40px;
-  height: auto;
-
-  image-rendering: pixelated;
-  opacity: 0.9;
-
-  flex-shrink: 0;
-}
-body {
-  top: 0 !important;
-}
-
-
-.support-btn {
-
-  position: relative;
-  overflow: hidden;
-
-  background: #333;
-
-  animation: supportGlow 4s ease-in-out infinite;
-
-  transition: 0.3s;
-}
-
-@keyframes supportGlow {
-
-  0% {
-    transform: scale(1);
-    background: #333;
-    box-shadow: 0 0 0 rgba(255,105,180,0);
-  }
-
-  25% {
-    background: #444;
-  }
-
-  50% {
-    transform: scale(1.05);
-
-    background: #ff77c8;
-
-    box-shadow:
-      0 0 14px rgba(255,105,180,0.5),
-      0 0 24px rgba(120,190,255,0.35);
-  }
-
-  75% {
-    background: #6bbcff;
-  }
-
-  100% {
-    transform: scale(1);
-
-    background: #333;
-
-    box-shadow: 0 0 0 rgba(255,105,180,0);
-  }
-
-}
 
 </style>
 </head>
@@ -2427,7 +2088,7 @@ Support Me / Donate →
 
 <!-- FOOTER -->
 <div class="footer">
-  Built by a Trans Person with LOVE, MensIsneM
+  Built by a Trans Person with LOVE ❤️<br>MensIsneM
 </div>
 </div>
 </body>
