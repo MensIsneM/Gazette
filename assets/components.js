@@ -75,3 +75,59 @@ function loadNavbar(activePage = "") {
 
   document.getElementById("navbar").innerHTML = nav;
 }
+
+function loadSiteFooter() {
+
+  const footerHTML = `
+
+    <div class="section">
+
+      <h2>Support This Project 🙏</h2>
+
+      <p>
+        This website is independently built and maintained by a trans person
+        trying to make Gazette procedures easier, safer and more accessible
+        for everyone.
+      </p>
+
+      <p>
+        If this tool helped you save money, avoid agents, reduce confusion
+        or navigate the process more easily, please consider supporting
+        the project.
+      </p>
+
+      <a href="support.html" class="btn">
+        Support Me / Donate →
+      </a>
+
+    </div>
+
+    <div class="section center">
+
+      <h3>Connect</h3>
+
+      <a class="btn"
+         href="https://github.com/MensIsneM/Gazette"
+         target="_blank">
+
+         This project is on GitHub
+      </a>
+
+      <br><br>
+
+      <a class="btn"
+         href="mailto:mensisnem.dev@gmail.com">
+
+         Contact Me for any Questions
+      </a>
+
+    </div>
+
+    <div class="footer">
+      Built by a Trans Person with LOVE ❤️<br>MensIsneM
+    </div>
+
+  `;
+
+  document.getElementById("site-footer").innerHTML = footerHTML;
+}
