@@ -233,7 +233,7 @@ button:hover { opacity: 0.9; }
 }
 
 .info-blue-box {
-  background: #eef8ff;
+  background: #eef7ff;
   border-left: 4px solid #3498db;
   padding: 12px;
   border-radius: 8px;
@@ -384,4 +384,12 @@ p, li {
   cursor: pointer;
 
   z-index: 2;
+}
+
+.ref-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 10px;
+
 }
