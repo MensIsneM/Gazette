@@ -233,8 +233,8 @@ button:hover { opacity: 0.9; }
 }
 
 .info-blue-box {
-  background: #222;
-  border-left: 4px solid #ff9800;
+  background: #eef8ff;
+  border-left: 4px solid #3498db;
   padding: 12px;
   border-radius: 8px;
   margin-top: 12px;
