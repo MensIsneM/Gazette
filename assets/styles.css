@@ -232,6 +232,14 @@ button:hover { opacity: 0.9; }
   margin-top: 12px;
 }
 
+.info-blue-box {
+  background: #222;
+  border-left: 4px solid #ff9800;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 12px;
+}
+
 .danger-box {
   background: #ffe5e5;
   border-left: 4px solid #e53935;
