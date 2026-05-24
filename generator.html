@@ -21,25 +21,19 @@
   max-width: 600px;
   margin: 20px auto;
   background: #DAB1DA;
-  display: flex;
-  
+
   padding: 10px;
 }
-
 #editor {
-  flex: 200 200 200px;
   background: white;
   display: flex;
-  padding: 25px;
   flex-direction: column;
   gap: 10px;
+
+  padding: 25px;
+
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-  height: fit-content;
-  position: sticky;
-  top: 20px;
-  max-height: 90vh;
-  overflow-y: auto;
 }
 #editor button {
   width: 100%;
@@ -71,13 +65,13 @@
 }
 
 h2 { color: #2c3e50; margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 1.3rem; }
-h4 { margin: 20px 0 10px; color: #34495e; border-left: 4px solid #3498db; padding-left: 10px; font-size: 1rem; }
+h4 { margin: 20px 0 10px; color: #000000; border-left: 4px solid #3498db; padding-left: 10px; font-size: 1rem; }
 label { display: block; font-weight: 600; margin-top: 12px; font-size: 0.85rem; color: #555; }
 input, select, textarea {
   width: 100%;
   margin: 5px 0 10px;
   padding: 10px;
-  border: 1px solid #dcdde1;
+  border: 2px solid #dcdde1;
   border-radius: 6px;
   box-sizing: border-box;
   font-size: 0.9rem;
@@ -347,25 +341,6 @@ transform-origin: top left;
   }
 }
 
-@media (max-width: 768px) {
-  #app {
-    flex-direction: column;
-  }
-
-  #editor {
-    position: relative;  
-    max-height: none;
-    overflow: visible;
-  }
- 
-  #preview-container {
-    width: 100%;
-  }
-
-  #page1-preview-box {
-    max-height: 300px;
-  }
-}
 
 @media print {
   .page {
@@ -555,10 +530,10 @@ function changeLanguage(lang) {
     </div>
 </div>
 
-<div id="visitor-counter">
-  <span>👀</span>
-  <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fmensisnem.github.io%2FGazette%2F&label=&countColor=%233498db" />
-</div>
+<!-- <div id="visitor-counter"> -->
+  <!-- <span>👀</span> -->
+  <!-- <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fmenxsisnem.github.io%2FGazette%2F&label=&countColor=%233498db" /> -->
+<!-- </div> -->
 
 <script>
 function hideOfflineNotice() {
