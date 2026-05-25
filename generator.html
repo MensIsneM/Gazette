@@ -427,10 +427,12 @@ function changeLanguage(lang) {
       <h2>Application Data</h2>
   
   <label>Full Old Name (Legal)</label>
-  <input id="old_name" placeholder="Dead name">
+  <input id="old_name"
+       placeholder="Dead name"
+       oninput="syncSameName()">
 <div class="checkbox-row">
   <label class="switch">
-    <input type="checkbox" id="use_alias" onchange="toggleAlias()">
+    <input type="checkbox" id="use_alias"  name="use_alias" onchange="toggleAlias()">
     <span class="slider"></span>
 	
   </label>
@@ -463,7 +465,17 @@ function changeLanguage(lang) {
   <label>Full New Name</label>
   <input id="new_name" placeholder="New name">
  
-  
+  <div class="checkbox-row">
+  <label class="switch">
+    <input type="checkbox"
+           id="same_name"
+		   name="same_name"
+           onchange="toggleSameName()">
+    <span class="slider"></span>
+  </label>
+
+  <span>Change Only Gender (Keep OLD Name)</span>
+</div>
 
   <label>Father's Name</label>
   <input id="guardian" placeholder="Father name">
@@ -559,7 +571,7 @@ document.addEventListener('click', function(e) {
   }
 });
 
-id="datefn"
+
 function getFormattedDate() {
   const d = new Date();
   const day = d.getDate();
@@ -637,7 +649,35 @@ function toggleAlias() {
 
   section.style.display = checkbox.checked ? "block" : "none";
 }
+function toggleSameName() {
 
+  const checkbox = document.getElementById("same_name");
+  const newNameInput = document.getElementById("new_name");
+
+  if (checkbox.checked) {
+
+    newNameInput.value =
+      document.getElementById("old_name").value;
+
+    newNameInput.disabled = true;
+
+  } else {
+
+    newNameInput.disabled = false;
+    newNameInput.value = "";
+  }
+}
+function syncSameName() {
+
+  const checkbox =
+    document.getElementById("same_name");
+
+  if (checkbox.checked) {
+
+    document.getElementById("new_name").value =
+      document.getElementById("old_name").value;
+  }
+}
 function getWitnessSection() {
   return `
     <div style="margin-top: 40px;">
@@ -823,7 +863,9 @@ data.addr = data.addr
     ? buildAlias(data.old, data.oldAlias1, data.oldAlias2, data.oldAlias3, data.oldAlias4)
     : data.old
 );
-
+  const sameName =
+  document.getElementById("same_name").checked;
+  
   const newNameFull = (
   data.useAlias
     ? buildAlias(data.new)
@@ -881,7 +923,11 @@ const birthGenderMap = {
 const advertText = `
 PUBLIC NOTICE
 
-It is for general information that I was previously known as ${oldNameFull} ${oldRel} ${data.father} R/O ${data.addr}, and after being diagnosed with Gender Dysphoria under the supervision of a registered medical practitioner in ${data.medPlace}, have changed my gender as ${newGen.toLowerCase()}. I henceforth be known as ${newNameFull}, ${newRel} ${data.father} R/O ${data.addr}. It is certified that I have complied with other legal requirements in the connection.
+It is for general information that I was previously known as ${oldNameFull} ${oldRel} ${data.father} R/O ${data.addr}, and after being diagnosed with Gender Dysphoria under the supervision of a registered medical practitioner in ${data.medPlace}, ${
+  sameName
+    ? `have changed my gender to ${newGen.toLowerCase()} and will not be changing my name. I henceforth be known as ${oldNameFull}, ${newRel} ${data.father} R/O ${data.addr}.`
+    : `have changed my gender to ${newGen.toLowerCase()}. I henceforth be known as ${newNameFull}, ${newRel} ${data.father} R/O ${data.addr}.`
+} It is certified that I have complied with other legal requirements in the connection.
 
 ${oldNameFull}
 `;
@@ -900,13 +946,14 @@ showGeneratedToast();
     newGen,
     newRel,
     oldRel,
+	sameName,
     data
   }; 
 
 }
 
 
-id="finaldocx"
+
 function downloadAffidavitDOCX() {
   const result = generate();
   if (!result) return;
@@ -920,6 +967,7 @@ function downloadAffidavitDOCX() {
     newGen,
     newRel,
 	oldRel,
+	sameName,
     data
   } = result;
 
@@ -933,7 +981,210 @@ function downloadAffidavitDOCX() {
 
   const today = getFormattedDate();
 
-  const doc = new Document({
+let doc;
+if (sameName) {
+
+  doc = new Document({
+    sections: [
+      {
+        properties: {
+          page: {
+            margin: {
+              top: 1200,
+              bottom: 1200,
+              left: 1200,
+              right: 1200
+            }
+          }
+        },
+
+        children: [
+          new Paragraph({
+            children: [new TextRun("")],
+            spacing: { before: 11000 } 
+              }),
+          // TITLE
+          new Paragraph({
+            alignment: AlignmentType.CENTER,
+            children: [
+              new TextRun({
+                text: "AFFIDAVIT FOR CHANGE IN GENDER",
+                bold: true,
+                size: 28
+              })
+            ],
+            spacing: { after: 300 }
+          }),
+
+          // INTRO
+          // INTRO (12pt body text)
+new Paragraph({
+  alignment: AlignmentType.JUSTIFIED,
+  children: [
+    new TextRun({
+      text:
+        `I, ${oldNameFull}, ${oldRel} ${data.father}, aged about ${age} years, residing at ${data.addr}, do hereby solemnly affirm and state on oath as under:`,
+      size: 24
+    })
+  ],
+  spacing: { after: 300 }
+}),
+
+// PAGE BREAK (no change needed)
+new Paragraph({
+  children: [new TextRun({ break: 1 })],
+  pageBreakBefore: true
+}),
+
+new Paragraph({
+            alignment: AlignmentType.CENTER,
+            children: [
+              new TextRun({
+                text: "-2-",
+                bold: true,
+                size: 24
+              })
+            ],
+        
+          }),
+
+// POINTS (12pt + hanging indent)
+// POINTS
+...([
+            "That I am a permanent resident of the address mentioned above.",
+
+            `That I have undergone Gender Transition therapy under the supervision of a registered medical practitioner. Consequently, I have transitioned my gender from ${oldGen} to ${newGen}.`,
+
+            `That it is for general information that I want to change my Gender as ${newGen} in all my official records, deeds, writings, identity documents, and certificates, and I am NOT changing my name. My legal name shall continue to remain ${oldNameFull}.`,
+
+            "That the above statement made by me is true and correct to the best of my knowledge and belief. If any legal issue arises in this regard at any stage, I will be personally responsible for the same and The Department of Publication will not be liable for any consequences arising therefrom.",
+
+            "That I have complied with all other legal requirements in this connection."
+
+          ].map((text, i) =>
+  new Paragraph({
+    alignment: AlignmentType.JUSTIFIED,
+    indent: {
+      left: 550,
+      right: 550,
+      hanging: 250
+    },
+    children: [
+      new TextRun({
+        text: `${i + 1}. ${text}`,
+        size: 24
+      })
+    ],
+    spacing: { after: 200 }
+  })
+)),
+
+// spacer
+new Paragraph({ text: "", spacing: { after: 200 } }),
+
+// DECLARATION LINE (12pt)
+new Paragraph({
+  alignment: AlignmentType.JUSTIFIED,
+  children: [
+    new TextRun({
+      text: `In witness whereof, I have hereunto subscribed my signature on this ${today}.`,
+
+      size: 24
+    })
+  ],
+  spacing: { after: 600 }
+}),
+
+// DEPONENT RIGHT (12pt)
+new Paragraph({
+  alignment: AlignmentType.RIGHT,
+  indent: {
+    left: 550,
+    hanging: 250
+  },
+  children: [
+    new TextRun({
+      text: oldNameFull,
+      size: 24
+    })
+  ]
+}),
+
+new Paragraph({
+  alignment: AlignmentType.RIGHT,
+  indent: {
+    left: 550,
+    hanging: 250
+  },
+  children: [
+    new TextRun({
+      text: "(DEPONENT)",
+      size: 24
+    })
+  ]
+}),
+
+
+// WITNESS BLOCK (12pt)
+new Paragraph({
+  children: [new TextRun({ text: "Witness 1: ", size: 24 })]
+}),
+new Paragraph({
+  children: [new TextRun({ text: "Name: .........................................", size: 24 })]
+}),
+new Paragraph({
+  children: [new TextRun({ text: "Address: .....................................", size: 24 })]
+}),
+
+new Paragraph({
+  children: [new TextRun({ text: "Sign: .........................................", size: 24 })]
+}),
+
+new Paragraph({ text: "", spacing: { after: 200 } }),
+
+new Paragraph({
+  children: [new TextRun({ text: "Witness 2: ", size: 24 })]
+}),
+new Paragraph({
+  children: [new TextRun({ text: "Name: .........................................", size: 24 })]
+}),
+new Paragraph({
+  children: [new TextRun({ text: "Address: .....................................", size: 24 })]
+}),
+
+new Paragraph({
+  children: [new TextRun({ text: "Sign: .........................................", size: 24 })]
+}),
+
+
+
+new Paragraph({ text: "", spacing: { after: 200 } }),
+
+// FOOTER (12pt)
+new Paragraph({
+  children: [new TextRun({ text: "Identified by me,", size: 24 })]
+}),
+new Paragraph({
+  children: [new TextRun({ text: "Advocate:", size: 24 })]
+}),
+
+new Paragraph({ text: "", spacing: { after: 200 } }),
+
+new Paragraph({
+  children: [new TextRun({ text: "Place:", size: 24 })]
+}),
+new Paragraph({
+  children: [new TextRun({ text: "Date:", size: 24 })]
+})
+
+        ] 
+      }
+    ]
+  });
+
+} else {
+  
+  doc = new Document({
     sections: [
       {
         properties: {
@@ -1140,7 +1391,7 @@ new Paragraph({
         ] 
       }
     ]
-  }); 
+  }); }
 
   Packer.toBlob(doc).then(blob => {
     const link = document.createElement("a");
@@ -1160,6 +1411,7 @@ function downloadCDDOCX() {
     newGen,
     newRel,
     oldRel,
+	sameName,
     data
   } = result;
 
@@ -1192,7 +1444,9 @@ function downloadCDDOCX() {
             alignment: AlignmentType.JUSTIFIED,
             children: [
               new TextRun({
-                text: `I ${oldNameFull}, ${oldRel} ${data.father}, residing at ${data.addr}, do hereby undertake that I ${oldNameFull} want to change my name to ${newNameFull} and gender as ${newGen}.`,
+                text: sameName
+  ? `I ${oldNameFull}, ${oldRel} ${data.father}, residing at ${data.addr}, do hereby undertake that I ${oldNameFull} want to change my gender as ${newGen} and not changing my name`
+  : `I ${oldNameFull}, ${oldRel} ${data.father}, residing at ${data.addr}, do hereby undertake that I ${oldNameFull} want to change my name to ${newNameFull} and gender as ${newGen}.`,
                 size: 24
               })
             ],
@@ -1299,7 +1553,7 @@ function downloadPDF_pdfmake() {
   }
 };
 
-  const { newNameFull, oldNameFull, oldRel, newRel, oldGen, newGen, data } = result;
+  const { newNameFull, oldNameFull, oldRel, newRel, oldGen, newGen, sameName, data } = result;
 
   const docDefinition = {
     pageSize: 'A4',
@@ -1327,20 +1581,34 @@ function downloadPDF_pdfmake() {
     },
     {
       width: '*',
-  text: [
-    'I, ',
-    b(oldNameFull + ', '),
-    oldRel + ' ',
-    data.father + ', ',
-    'assigned as ',
-    b(oldGen + ' '),
-    'at the time of birth, residing at ',
-    data.addr + ', ',
-    'hereby undertake that I want to change my name to ',
-    b(newNameFull + ' '),
-    'gender as ',
-    b(newGen + '.')
-  ],
+text: sameName
+  ? [
+      'I, ',
+      b(oldNameFull + ', '),
+      oldRel + ' ',
+      data.father + ', ',
+      'assigned as ',
+      b(oldGen + ' '),
+      'at the time of birth, residing at ',
+      data.addr + ', ',
+      'hereby undertake that I want to change my gender as ',
+      b(newGen + ' '),
+	  'and NOT changing my name.'
+    ]
+  : [
+      'I, ',
+      b(oldNameFull + ', '),
+      oldRel + ' ',
+      data.father + ', ',
+      'assigned as ',
+      b(oldGen + ' '),
+      'at the time of birth, residing at ',
+      data.addr + ', ',
+      'hereby undertake that I want to change my name to ',
+       b(newNameFull + ' '),
+      'and gender as ',
+      b(newGen + '.')
+    ],
   alignment: 'justify'
     }
   ],
@@ -1359,15 +1627,15 @@ columns: [
     {
       width: '*',
   text: [
-    'I, ',
-    b(oldNameFull + ', '),
-    oldRel + ' ',
-    data.father + ', ',
-    'henceforth be known as ',
-    b(newNameFull + ', '),
-    newRel + ' ',
-    data.father + '. '
-  ],
+      'I, ',
+      b(oldNameFull + ', '),
+      oldRel + ' ',
+      data.father + ', ',
+      'henceforth be known as ',
+      b(newNameFull + ', '),
+      newRel + ' ',
+      data.father + '. '
+    ],
   alignment: 'justify'
     }
   ],
@@ -1460,20 +1728,32 @@ text: ['Signature ________________________   Full Name__________________________
     },
     {
       width: '*',
-  text: [
-    'I, ',
-    b(oldNameFull + ', '),
-    oldRel + ' ',
-    data.father + ', ',
-    'residing at ',
-    data.addr + ', ',
-    'hereby undertake that I ',
-	b(oldNameFull),
-	' want to change my name to ',
-    b(newNameFull + ' '),
-    'gender as ',
-    b(newGen + '.')
-  ],
+  text: sameName
+  ? [
+      'I, ',
+      b(oldNameFull + ', '),
+      oldRel + ' ',
+      data.father + ', ',
+      'residing at ',
+      data.addr + ', ',
+      'hereby undertake that I want to change my gender as ',
+      b(newGen + ' '),
+	  'and NOT changing my name.'
+    ]
+  : [
+      'I, ',
+      b(oldNameFull + ', '),
+      oldRel + ' ',
+      data.father + ', ',
+      'assigned as ',
+      b(oldGen + ' '),
+      'at the time of birth, residing at ',
+      data.addr + ', ',
+      'hereby undertake that I want to change my name to ',
+      b(newNameFull + ' '),
+      'and gender as ',
+      b(newGen + '.')
+    ],
   alignment: 'justify'
     }
   ],
@@ -1594,20 +1874,32 @@ text: ['Signature ________________________   Full Name__________________________
     },
     {
       width: '*',
-  text: [
-    'I, ',
-    b(oldNameFull + ', '),
-    oldRel + ' ',
-    data.father + ', ',
-    'residing at ',
-    data.addr + ', ',
-    'hereby undertake that I ',
-	b(oldNameFull),
-	' want to change my name to ',
-    b(newNameFull + ' '),
-    'gender as ',
-    b(newGen + '.')
-  ],
+text: sameName
+  ? [
+      'I, ',
+      b(oldNameFull + ', '),
+      oldRel + ' ',
+      data.father + ', ',
+      'residing at ',
+      data.addr + ', ',
+      'hereby undertake that I want to change my gender as ',
+      b(newGen + ' '),
+	  'and NOT changing my name.'
+    ]
+  : [
+      'I, ',
+      b(oldNameFull + ', '),
+      oldRel + ' ',
+      data.father + ', ',
+      'assigned as ',
+      b(oldGen + ' '),
+      'at the time of birth, residing at ',
+      data.addr + ', ',
+      'hereby undertake that I want to change my name to ',
+      b(newNameFull + ' '),
+      'and gender as ',
+      b(newGen + '.')
+    ],
   alignment: 'justify'
     }
   ],
@@ -1735,7 +2027,10 @@ text: [ `Respected Sir/Ma'am,`
 margin: [0, 30, 0, 20]
 },
 {
-text:[ 'I am enclosing all the documents for publishing Change of Gender in Public Notice in the Gazette, All the formalities required have been completed.'
+text: sameName 
+? [ 'I am enclosing all the documents for publishing Change of Gender in Public Notice in the Gazette, All the formalities required have been completed.'
+]
+: [ 'I am enclosing all the documents for publishing Change of Name and Gender in Public Notice in the Gazette, All the formalities required have been completed.'
 ],
 lineHeight: 1.3
 },
@@ -2020,5 +2315,16 @@ Support Me / Donate →
   loadNavbar("generator");
 </script>
 </div>
+<script>
+
+window.addEventListener("pageshow", () => {
+
+  toggleAlias();
+  toggleSameName();
+  syncSameName();
+
+});
+
+</script>
 </body>
 </html>
