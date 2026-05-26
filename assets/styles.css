@@ -38,8 +38,7 @@ padding: 20px;
 /* navigation bar */
 
 .nav {
-  background: transparent;
-  padding: 8px;
+
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -48,6 +47,14 @@ padding: 20px;
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
+
+  padding: 8px;
+
+  background: rgba(218, 177, 218, 0.95);
+  backdrop-filter: blur(8px);
+
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .nav a {
