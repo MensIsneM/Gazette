@@ -3,7 +3,8 @@ body {
   margin: 0;
   background: #DAB1DA;
   line-height: 1.6;
-
+  overflow-x: hidden;
+overflow-x: clip;
   top: 0 !important;
 }
 
@@ -36,12 +37,10 @@ padding: 20px;
 
 
 /* navigation bar */
-#navbar {
-  width: 100%;
-  position: relative; 
-}
-.nav {
 
+.nav {
+  background: transparent;
+  padding: 8px;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -50,14 +49,6 @@ padding: 20px;
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
-
-  padding: 8px;
-
-  background: rgba(218, 177, 218, 0.95);
-  backdrop-filter: blur(8px);
-
-  width: 100%;
-  box-sizing: border-box;
 }
 
 .nav a {
@@ -137,8 +128,8 @@ button:hover { opacity: 0.9; }
 
 .support-btn {
 
-  position: sticky;
-
+  position: relative;
+  overflow: hidden;
 
   background: #333;
 
@@ -287,7 +278,7 @@ details {
   border: 1px solid #ddd;
   border-radius: 8px;
   background: #fafafa;
-
+  overflow: hidden;
 }
 
 details[open] summary {
@@ -360,7 +351,7 @@ p, li {
 
   width: 40px;
   height: 40px;
-
+  overflow: hidden;
 }
 
 .translate-icon {
@@ -400,4 +391,5 @@ p, li {
   height: auto;
   border-radius: 8px;
   margin-top: 10px;
+
 }
