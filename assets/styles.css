@@ -3,7 +3,7 @@ body {
   margin: 0;
   background: #DAB1DA;
   line-height: 1.6;
-overflow-x: clip;
+
   top: 0 !important;
 }
 
@@ -397,5 +397,4 @@ p, li {
   height: auto;
   border-radius: 8px;
   margin-top: 10px;
-
 }
