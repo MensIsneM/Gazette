@@ -4,7 +4,6 @@ body {
   background: #DAB1DA;
   line-height: 1.6;
   overflow-x: hidden;
-overflow-x: clip;
   top: 0 !important;
 }
 
