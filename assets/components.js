@@ -43,7 +43,8 @@ function loadNavbar(activePage = "") {
           <select class="custom-language notranslate"
                   onchange="changeLanguage(this.value)">
 
-            <option value="hi">हिन्दी</option>
+            <option disabled selected>Choose Language</option>
+			<option value="hi">हिन्दी</option>
             <option value="kn">ಕನ್ನಡ</option>
             <option value="ta">தமிழ்</option>
             <option value="te">తెలుగు</option>
