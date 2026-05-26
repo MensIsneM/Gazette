@@ -36,7 +36,10 @@ padding: 20px;
 
 
 /* navigation bar */
-
+#navbar {
+  width: 100%;
+  position: relative; 
+}
 .nav {
 
   position: sticky;
